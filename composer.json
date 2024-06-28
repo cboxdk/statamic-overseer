@@ -1,0 +1,37 @@
+{
+    "name": "cboxdk/statamic-overseer",
+    "autoload": {
+        "psr-4": {
+            "Cboxdk\\StatamicOverseer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cboxdk\\StatamicOverseer\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "statamic/cms": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Overseer",
+            "description": "Statamic Overseer addon"
+        },
+        "laravel": {
+            "providers": [
+                "Cboxdk\\StatamicOverseer\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
