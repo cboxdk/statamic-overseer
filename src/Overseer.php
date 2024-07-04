@@ -112,8 +112,8 @@ class Overseer
             if (config('statamic.overseer.storage.enabled')) {
                 rescue(function () use (&$executionId, &$duration, &$memory, &$cpuUsage, &$user, &$impersonator) {
                     $execution = new OverseerExecution();
+                    $execution->id = $executionId;
                     $execution->fill([
-                        'execution_id' => $executionId,
                         'user_id' => $user->id ?? null,
                         'impersonator_id' => $impersonator->id ?? null,
                         'host' => gethostname(),

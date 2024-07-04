@@ -46,4 +46,9 @@ class OverseerAudit extends Model
             return User::find($this->impersonator_id);
         }
     }
+
+    public function execution()
+    {
+        return $this->belongsTo(OverseerExecution::class, 'id', 'execution_id');
+    }
 }

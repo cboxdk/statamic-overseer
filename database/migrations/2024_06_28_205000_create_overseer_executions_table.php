@@ -19,8 +19,7 @@ return new class extends Migration
         $schema = Schema::connection(config('statamic.overseer.storage.connection'));
 
         $schema->create('overseer_executions', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('execution_id')->index()->unique();
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->index()->nullable();
             $table->uuid('impersonator_id')->index()->nullable();
             $table->string('host')->nullable();

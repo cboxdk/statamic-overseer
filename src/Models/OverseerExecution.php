@@ -2,11 +2,14 @@
 
 namespace Cboxdk\StatamicOverseer\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Statamic\Facades\User;
 
 class OverseerExecution extends Model
 {
+
+    //use HasUuids;
     public function getConnectionName()
     {
         return config('statamic.overseer.storage.connection');
@@ -31,12 +34,12 @@ class OverseerExecution extends Model
 
     public function audits()
     {
-        return $this->hasMany(OverseerAudit::class, 'execution_id', 'execution_id');
+        return $this->hasMany(OverseerAudit::class, 'execution_id', 'id');
     }
 
     public function events()
     {
-        return $this->hasMany(OverseerEvent::class, 'execution_id', 'execution_id');
+        return $this->hasMany(OverseerEvent::class, 'execution_id', 'id');
     }
 
     public function user()
