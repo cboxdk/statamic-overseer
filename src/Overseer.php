@@ -122,7 +122,7 @@ class Overseer
                             'impersonator_id' => $impersonator->id ?? null,
                             ...$event->toArray(),
                         ]);
-                        dump($audit->toArray());
+                        //dump($audit->toArray());
                         $audit->save();
                     }
 
@@ -137,9 +137,7 @@ class Overseer
                             'event' => $eventData->content,
                             'recorded_at' => $eventData->recordedAt->format('Y-m-d H:i:s.u'),
                         ]);
-                        dump($event->toArray());
                         $event->save();
-                        dump($event->toArray());
                     }
                 });
             }
