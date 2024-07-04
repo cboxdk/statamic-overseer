@@ -2,6 +2,8 @@
 
 namespace Cboxdk\StatamicOverseer\Presets;
 
+use Cboxdk\StatamicOverseer\EventHandlers\LoginHandler;
+use Cboxdk\StatamicOverseer\EventHandlers\LogoutHandler;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
 
@@ -18,8 +20,8 @@ class EventPresets
     public static function authentication()
     {
         return [
-            //            \Illuminate\Auth\Events\Login::class => null,
-            //            \Illuminate\Auth\Events\Logout::class => null,
+                        \Illuminate\Auth\Events\Login::class => LoginHandler::class,
+                        \Illuminate\Auth\Events\Logout::class => LogoutHandler::class,
             //            \Illuminate\Auth\Events\Failed::class => null,
             //            \Illuminate\Auth\Events\PasswordReset::class => null,
         ];

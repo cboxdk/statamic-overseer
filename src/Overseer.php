@@ -16,6 +16,9 @@ class Overseer
 
     public static array $audits = [];
 
+    public static $user;
+    public static $impersonator;
+
     public static bool $shouldTrack = false;
 
     public static array $trackers = [];
@@ -48,6 +51,22 @@ class Overseer
 
     public function trackEvent($event): void
     {
+        if (!self::$user) {
+            try {
+                if (Auth::hasResolvedGuards() && Auth::hasUser()) {
+                    self::$user = Auth::user();
+                    if (self::$user) {
+                        // Impersonation
+                        if ($impersonation = session()->get('statamic_impersonated_by')) {
+                            self::$impersonator = User::find($impersonation);
+                        }
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Do nothing.
+            }
+        }
+
         self::$events[] = $event;
     }
 
@@ -81,21 +100,8 @@ class Overseer
             $executionId = Str::orderedUuid()->toString();
 
             // user
-            $user = null;
-            $impersonator = null;
-            try {
-                if (Auth::hasResolvedGuards() && Auth::hasUser()) {
-                    $user = Auth::user();
-                    if ($user) {
-                        // Impersonation
-                        if ($impersonation = session()->get('statamic_impersonated_by')) {
-                            $impersonator = User::find($impersonation);
-                        }
-                    }
-                }
-            } catch (\Throwable $e) {
-                // Do nothing.
-            }
+            $user = self::$user;
+            $impersonator = self::$impersonator;
 
             // Persist to local storage
             if (config('statamic.overseer.storage.enabled')) {
