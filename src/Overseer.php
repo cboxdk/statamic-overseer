@@ -138,9 +138,7 @@ class Overseer
                             'event' => $eventData->content,
                             'recorded_at' => $eventData->recordedAt,
                         ]);
-                        dump($event->toArray());
                         $event->save();
-                        dump($event->toArray());
                     }
                 });
             }
