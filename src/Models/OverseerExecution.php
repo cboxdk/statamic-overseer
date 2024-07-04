@@ -8,10 +8,19 @@ use Statamic\Facades\User;
 
 class OverseerExecution extends Model
 {
-    //use HasUuids;
     public function getConnectionName()
     {
         return config('statamic.overseer.storage.connection');
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
+    public function getIncrementing()
+    {
+        return false;
     }
 
     protected $fillable = [
@@ -28,7 +37,6 @@ class OverseerExecution extends Model
     ];
 
     protected $casts = [
-        'id' => 'string',
         'data' => 'array',
     ];
 
@@ -39,7 +47,7 @@ class OverseerExecution extends Model
 
     public function events()
     {
-        return $this->hasMany(OverseerEvent::class, 'execution_id', 'id');
+        return $this->hasMany(OverseerEvent::class, 'execution_id', 'id')->orderBy('recorded_at');
     }
 
     public function user()
