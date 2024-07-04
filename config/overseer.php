@@ -17,21 +17,19 @@ return [
     ],
     'trackers' => [
         \Cboxdk\StatamicOverseer\Trackers\RequestTracker::class => [
-            'ignore_http_paths' => [
+            'ignore_paths' => [
                 '_debugbar/*',
             ],
-            'ignore_http_methods' => [
-                //            'get',
-                //            'post',
-                //            'put',
-                //            'patch',
-                //            'delete',
-            ],
-            'ignore_status_codes' => [
-                //            '200',
-            ],
             'ignore_middlewares' => [
-                //'web',
+                'web',
+            ],
+            'hide_parameters' => [
+                'password',
+                'password_confirmation',
+            ],
+            'hide_headers' => [
+                'authorization',
+                'php-auth-pw',
             ],
         ],
         \Cboxdk\StatamicOverseer\Trackers\QueryTracker::class => [

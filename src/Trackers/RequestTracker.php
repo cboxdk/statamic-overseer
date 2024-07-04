@@ -79,20 +79,7 @@ class RequestTracker extends Tracker
      */
     protected function shouldIgnoreRequest(RequestHandled $event): bool
     {
-        // Ignorér baseret på HTTP-metoder
-        $ignoreMethods = $this->options['ignore_http_methods'] ?? [];
-        if (in_array(strtolower($event->request->method()), array_map('strtolower', $ignoreMethods))) {
-            return true;
-        }
-
-        // Ignorér baseret på statuskoder
-        $ignoreStatus = $this->options['ignore_status_codes'] ?? [];
-        if (in_array($event->response->getStatusCode(), $ignoreStatus)) {
-            return true;
-        }
-
-        // Ignorér baseret på stier
-        $ignorePaths = $this->options['ignore_http_paths'] ?? [];
+        $ignorePaths = $this->options['ignore_paths'] ?? [];
         foreach ($ignorePaths as $pattern) {
             $pattern = Str::of($pattern)->replaceStart('/', '')->toString();
             if (Str::is($pattern, $event->request->path())) {
@@ -100,16 +87,13 @@ class RequestTracker extends Tracker
             }
         }
 
-        // Ignorér baseret på middleware
         $ignoreMiddleware = $this->options['ignore_middlewares'] ?? [];
         $middlewares = array_values(optional($event->request->route())->gatherMiddleware() ?? []);
 
-        // Hvis der ikke er nogen middleware i $middlewares, som ikke er i $ignoreMiddleware
         if (array_intersect($middlewares, $ignoreMiddleware)) {
             return true;
         }
 
-        // Ingen af kriterierne for at ignorere request blev opfyldt
         return false;
     }
 
@@ -122,7 +106,7 @@ class RequestTracker extends Tracker
     protected function payload($payload)
     {
         return $this->hideParameters($payload,
-            ['password']
+            $this->options['hide_parameters']
         );
     }
 
@@ -139,7 +123,7 @@ class RequestTracker extends Tracker
             ->all();
 
         return $this->hideParameters($headers,
-            ['password']
+            $this->options['hide_headers']
         );
     }
 
