@@ -15,6 +15,7 @@ class OverseerAudit extends Model
     protected $fillable = [
         'execution_id',
         'user_id',
+        'impersonator_id',
         'model_type',
         'model_handle',
         'model_id',
