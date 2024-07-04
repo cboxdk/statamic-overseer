@@ -60,6 +60,8 @@ return [
         \Cboxdk\StatamicOverseer\Trackers\RequestTracker::class => [
             'ignore_paths' => [
                 '_debugbar/*',
+                'cp/overseer/*',
+                'cp/dashboard',
             ],
             'ignore_middlewares' => [
                 'web',
@@ -78,6 +80,16 @@ return [
             'slow_query_time' => 100,
             'log_only_write' => true,
             'trace_max' => 20,
+        ],
+        \Cboxdk\StatamicOverseer\Trackers\HttpRequestTracker::class => [
+            'hide_parameters' => [
+                'password',
+                'password_confirmation',
+            ],
+            'hide_headers' => [
+                'authorization',
+                'php-auth-pw',
+            ],
         ],
         \Cboxdk\StatamicOverseer\Trackers\LogTracker::class => [],
         \Cboxdk\StatamicOverseer\Trackers\CommandTracker::class => [

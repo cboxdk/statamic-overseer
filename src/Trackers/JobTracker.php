@@ -26,9 +26,7 @@ class JobTracker extends Tracker
 
         $payload = $event->job->payload();
 
-        $job = isset($payload['data']['command'])
-            ? get_class($payload['data']['command'])
-            : $payload['job'];
+        $job = $payload['data']['commandName'] ?? $payload['job'];
 
         if (in_array($job, $this->options['ignore_jobs'])) {
             return;
@@ -40,7 +38,7 @@ class JobTracker extends Tracker
             'name' => $payload['displayName'],
             'tries' => $payload['maxTries'],
             'timeout' => $payload['timeout'],
-            'data' => $payload,
+            'data' => json_decode(json_encode($payload), true),
         ]);
         Overseer::trackEvent($log);
     }

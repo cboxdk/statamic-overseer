@@ -30,7 +30,7 @@ class ServiceProvider extends AddonServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // don't register watchers if not enabled
-        if (!config('statamic.overseer.enabled')) {
+        if (! config('statamic.overseer.enabled')) {
             return;
         }
 

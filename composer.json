@@ -15,7 +15,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^9.0",
-        "laravel/pint": "^1.16"
+        "laravel/pint": "^1.16",
+        "larastan/larastan": "^2.0"
     },
     "config": {
         "allow-plugins": {
