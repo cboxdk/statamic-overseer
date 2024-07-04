@@ -38,6 +38,8 @@ class StatamicEntrySaved extends EventHandler
         Overseer::addMessage(new Audit(
             message: 'Entry saved',
             properties: [
+                'status' => $entry->status(),
+                'published' => $entry->published(),
                 'changed_attributes' => $changedAttributes,
                 'diff' => $diff,
             ],
