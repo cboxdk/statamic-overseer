@@ -14,9 +14,13 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetReplaced;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetReuploaded;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetUploaded;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicBlueprintCreated;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicBlueprintDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicBlueprintSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
@@ -55,13 +59,13 @@ class EventPresets
             \Statamic\Events\AssetReuploaded::class => StatamicAssetReuploaded::class,
             \Statamic\Events\AssetSaved::class => StatamicAssetSaved::class,
             \Statamic\Events\AssetUploaded::class => StatamicAssetUploaded::class,
-            //            \Statamic\Events\BlueprintCreated::class => null,
-            //            \Statamic\Events\BlueprintDeleted::class => null,
-            //            \Statamic\Events\BlueprintSaved::class => null,
+            \Statamic\Events\BlueprintCreated::class => StatamicBlueprintCreated::class,
+            \Statamic\Events\BlueprintDeleted::class => StatamicBlueprintDeleted::class,
+            \Statamic\Events\BlueprintSaved::class => StatamicBlueprintSaved::class,
             \Statamic\Events\CollectionCreated::class => StatamicCollectionCreated::class,
             \Statamic\Events\CollectionDeleted::class => StatamicCollectionDeleted::class,
             \Statamic\Events\CollectionSaved::class => StatamicCollectionSaved::class,
-            //            \Statamic\Events\CollectionTreeDeleted::class => null,
+            \Statamic\Events\CollectionTreeDeleted::class => StatamicCollectionTreeDeleted::class,
             \Statamic\Events\CollectionTreeSaved::class => StatamicCollectionTreeSaved::class,
             \Statamic\Events\EntryCreated::class => StatamicEntryCreated::class,
             \Statamic\Events\EntryDeleted::class => StatamicEntryDeleted::class,
