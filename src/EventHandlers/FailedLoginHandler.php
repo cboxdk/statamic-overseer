@@ -32,7 +32,6 @@ class FailedLoginHandler extends EventHandler
 
         $this->track();
 
-
         Overseer::addMessage(new Audit(
             message: 'Login failed',
             properties: $properties,

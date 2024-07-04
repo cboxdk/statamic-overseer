@@ -25,7 +25,6 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
-use Statamic\Events\CollectionCreated;
 
 class EventPresets
 {

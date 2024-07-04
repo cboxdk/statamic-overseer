@@ -17,6 +17,7 @@ class Overseer
     public static array $audits = [];
 
     public static $user;
+
     public static $impersonator;
 
     public static bool $shouldTrack = false;
@@ -56,7 +57,7 @@ class Overseer
 
     public function trackEvent($event): void
     {
-        if (!self::$user) {
+        if (! self::$user) {
             try {
                 if (Auth::hasResolvedGuards() && Auth::hasUser()) {
                     self::$user = Auth::user();

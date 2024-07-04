@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Statamic\Events\CollectionDeleted;
 use Statamic\Events\CollectionTreeDeleted;
 
 class StatamicCollectionTreeDeleted extends EventHandler

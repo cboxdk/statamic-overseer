@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Statamic\Events\EntryCreated;
 use Statamic\Events\EntryDeleted;
 
 class StatamicEntryDeleted extends EventHandler

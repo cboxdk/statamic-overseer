@@ -8,7 +8,6 @@ use Statamic\Facades\User;
 
 class OverseerExecution extends Model
 {
-
     //use HasUuids;
     public function getConnectionName()
     {

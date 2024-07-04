@@ -5,7 +5,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\AssetReplaced;
-use Statamic\Events\AssetUploaded;
 
 class StatamicAssetReplaced extends EventHandler
 {
