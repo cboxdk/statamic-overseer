@@ -25,6 +25,11 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserCreated;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserSaved;
 
 class EventPresets
 {
@@ -91,11 +96,11 @@ class EventPresets
             //            \Statamic\Events\TermCreated::class => null,
             //            \Statamic\Events\TermDeleted::class => null,
             //            \Statamic\Events\TermSaved::class => null,
-            //            \Statamic\Events\UserCreated::class => null,
-            //            \Statamic\Events\UserDeleted::class => null,
-            //            \Statamic\Events\UserSaved::class => null,
-            //            \Statamic\Events\UserGroupDeleted::class => null,
-            //            \Statamic\Events\UserGroupSaved::class => null,
+            \Statamic\Events\UserCreated::class => StatamicUserCreated::class,
+            \Statamic\Events\UserDeleted::class => StatamicUserDeleted::class,
+            \Statamic\Events\UserSaved::class => StatamicUserSaved::class,
+            \Statamic\Events\UserGroupDeleted::class => StatamicUserGroupDeleted::class,
+            \Statamic\Events\UserGroupSaved::class => StatamicUserGroupSaved::class,
         ];
     }
 }
