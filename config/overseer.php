@@ -26,7 +26,7 @@ return [
         'queue' => [
             'enabled' => env('OVERSEER_STORAGE_QUEUE_ENABLED', false),
             'connection' => env('OVERSEER_STORAGE_QUEUE_CONNECTION', config('queue.default')),
-            'queue' => env('OVERSEER_STORAGE_QUEUE_NAME', 'default'),
+            'queue' => env('OVERSEER_STORAGE_QUEUE_NAME', false),
         ],
     ],
 

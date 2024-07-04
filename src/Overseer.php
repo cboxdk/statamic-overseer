@@ -128,7 +128,7 @@ class Overseer
 
             // Persist to local storage
             if (config('statamic.overseer.storage.enabled')) {
-                if (config('statamic.overseer.storage.queue')) {
+                if (config('statamic.overseer.storage.queue.enabled')) {
                     SaveToDatabase::queue($this->getEvents(), $this->getAudits(), $executionId, $duration, $memory, $cpuUsage, $user, $impersonator);
                 } else {
                     SaveToDatabase::sync($this->getEvents(), $this->getAudits(), $executionId, $duration, $memory, $cpuUsage, $user, $impersonator);
