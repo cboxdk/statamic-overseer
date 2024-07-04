@@ -18,8 +18,11 @@ class Audit implements Arrayable, JsonSerializable
     public ?array $properties;
 
     public ?string $site;
+
     public ?string $model_type;
+
     public ?string $model_handle;
+
     public ?string $model_id;
 
     /**
@@ -87,6 +90,7 @@ class Audit implements Arrayable, JsonSerializable
     public function setModelType(?string $model_type): Audit
     {
         $this->model_type = $model_type;
+
         return $this;
     }
 
@@ -98,6 +102,7 @@ class Audit implements Arrayable, JsonSerializable
     public function setModelHandle(?string $model_handle): Audit
     {
         $this->model_handle = $model_handle;
+
         return $this;
     }
 
@@ -109,10 +114,9 @@ class Audit implements Arrayable, JsonSerializable
     public function setModelId(?string $model_id): Audit
     {
         $this->model_id = $model_id;
+
         return $this;
     }
-
-
 
     public function toArray()
     {

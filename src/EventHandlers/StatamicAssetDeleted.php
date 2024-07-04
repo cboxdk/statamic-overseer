@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Statamic\Assets\Asset;
 use Statamic\Events\AssetUploaded;
 
 class StatamicAssetDeleted extends EventHandler

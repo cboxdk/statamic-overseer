@@ -3,7 +3,6 @@
 namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
-use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\BlueprintCreated;
 use Statamic\Fields\Blueprint;
 
