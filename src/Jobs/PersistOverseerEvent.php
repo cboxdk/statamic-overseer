@@ -2,12 +2,13 @@
 
 namespace Cboxdk\StatamicOverseer\Jobs;
 
+use Cboxdk\StatamicOverseer\Facades\Overseer;
+use Cboxdk\StatamicOverseer\Storage\SaveToDatabase;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Http;
 
 class PersistOverseerEvent implements ShouldQueue
 {
@@ -16,9 +17,10 @@ class PersistOverseerEvent implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public $payload)
+    public function __construct(public $events, public $audits, public $executionId, public $duration, public $memory, public $cpuUsage, public $user, public $impersonator)
     {
-        //
+        $this->connection = config('statamic.overseer.storage.queue.connection');
+        $this->queue = config('statamic.overseer.storage.queue.queue');
     }
 
     /**
@@ -26,13 +28,7 @@ class PersistOverseerEvent implements ShouldQueue
      */
     public function handle(): void
     {
-        rescue(function () {
-            $siteId = config('statamic.overseer.server.site');
-            $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
-
-            // Send events to overseer
-            $response = Http::withToken(config('statamic.overseer.server.token'))
-                ->post($url, $this->payload);
-        });
+        Overseer::disableTracking();
+        SaveToDatabase::sync($this->events, $this->audits, $this->executionId, $this->duration, $this->memory, $this->cpuUsage, $this->user, $this->impersonator);
     }
 }

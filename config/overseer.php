@@ -6,7 +6,11 @@ return [
         'enabled' => env('OVERSEER_STORAGE_ENABLED', true),
         'connection' => env('OVERSEER_STORAGE_CONNECTION', config('database.default')),
         'retention' => env('OVERSEER_STORAGE_RETENTION', 60),
-        'queue' => env('OVERSEER_STORAGE_QUEUE', false),
+        'queue' => [
+            'enabled' => env('OVERSEER_STORAGE_QUEUE_ENABLED', false),
+            'connection' => env('OVERSEER_STORAGE_QUEUE_CONNECTION', config('queue.default')),
+            'queue' => env('OVERSEER_STORAGE_QUEUE_NAME', 'default'),
+        ]
     ],
     'server' => [
         'enabled' => env('OVERSEER_SERVER_ENABLED', false),

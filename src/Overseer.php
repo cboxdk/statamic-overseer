@@ -5,6 +5,7 @@ namespace Cboxdk\StatamicOverseer;
 use Cboxdk\StatamicOverseer\Models\OverseerAudit;
 use Cboxdk\StatamicOverseer\Models\OverseerEvent;
 use Cboxdk\StatamicOverseer\Models\OverseerExecution;
+use Cboxdk\StatamicOverseer\Storage\SaveToDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Statamic\Facades\User;
@@ -45,6 +46,11 @@ class Overseer
         return self::$shouldTrack;
     }
 
+    public function disableTracking(): void
+    {
+        self::$shouldTrack = false;
+    }
+
     public function serverEnabled(): bool
     {
         return config('statamic.overseer.server.enabled', false);
@@ -81,6 +87,21 @@ class Overseer
         self::$audits[] = $audit;
     }
 
+    public function getEvents(): array
+    {
+        return self::$events;
+    }
+
+    public function getAudits(): array
+    {
+        return self::$audits;
+    }
+
+    public function getTrackers(): array
+    {
+        return self::$trackers;
+    }
+
     public function store(): void
     {
         // Stop tracking at this point
@@ -111,54 +132,18 @@ class Overseer
 
             // Persist to local storage
             if (config('statamic.overseer.storage.enabled')) {
-                rescue(function () use (&$executionId, &$duration, &$memory, &$cpuUsage, &$user, &$impersonator) {
-                    $execution = new OverseerExecution();
-                    $execution->id = $executionId;
-                    $execution->fill([
-                        'user_id' => $user->id ?? null,
-                        'impersonator_id' => $impersonator->id ?? null,
-                        'host' => gethostname(),
-                        'pid' => getmypid(),
-                        'duration' => $duration,
-                        'memory' => $memory,
-                        ...$cpuUsage,
-                    ]);
-                    $execution->save();
+                if (config('statamic.overseer.storage.queue')) {
+                    SaveToDatabase::queue($this->getEvents(), $this->getAudits(), $executionId, $duration, $memory, $cpuUsage, $user, $impersonator);
+                } else {
+                    SaveToDatabase::sync($this->getEvents(), $this->getAudits(), $executionId, $duration, $memory, $cpuUsage, $user, $impersonator);
+                }
 
-                    /** @var Audit $event */
-                    foreach (static::$audits as $event) {
-                        $audit = new OverseerAudit();
-                        $audit->fill([
-                            'execution_id' => $executionId,
-                            'user_id' => $user->id ?? null,
-                            'impersonator_id' => $impersonator->id ?? null,
-                            ...$event->toArray(),
-                        ]);
-                        $audit->save();
-                    }
-
-                    /** @var Event $eventData */
-                    foreach (static::$events as $eventData) {
-                        $event = new OverseerEvent();
-                        $event->fill([
-                            'execution_id' => $executionId,
-                            'user_id' => $user->id ?? null,
-                            'impersonator_id' => $impersonator->id ?? null,
-                            'type' => $eventData->type,
-                            'event' => $eventData->content,
-                            'recorded_at' => $eventData->recordedAt->format('Y-m-d H:i:s.u'),
-                        ]);
-                        $event->save();
-                    }
-                });
             }
 
-            //            $siteId = config('statamic.overseer.server.site');
-            //            $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
-            //
-            //            // Send events to overseer
-            //            $response = Http::withToken(config('statamic.overseer.server.token'))
-            //                ->post($url, $payload);
+            // persist to overseer cloud server
+            if (config('statamic.overseer.server.enabled')) {
+                // Not implemented yet
+            }
         }
     }
 
