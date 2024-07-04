@@ -44,8 +44,8 @@ class StatamicOverseerFilter extends Filter
     /**
      * Apply the filter.
      *
-     * @param \Statamic\Query\Builder $query
-     * @param array $values
+     * @param  \Statamic\Query\Builder  $query
+     * @param  array  $values
      * @return void
      */
     public function apply($query, $values)
@@ -56,7 +56,7 @@ class StatamicOverseerFilter extends Filter
     /**
      * Define the applied filter's badge text.
      *
-     * @param array $values
+     * @param  array  $values
      * @return string
      */
     public function badge($values)
@@ -69,7 +69,7 @@ class StatamicOverseerFilter extends Filter
     /**
      * Determine when the filter is shown.
      *
-     * @param string $key
+     * @param  string  $key
      * @return bool
      */
     public function visibleTo($key)

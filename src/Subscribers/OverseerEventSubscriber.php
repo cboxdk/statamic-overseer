@@ -7,12 +7,11 @@ use Illuminate\Events\Dispatcher;
 
 class OverseerEventSubscriber
 {
-
     public function subscribe(Dispatcher $events): array
     {
 
         // check if enabled
-        if (!Overseer::enabled()) {
+        if (! Overseer::enabled()) {
             return [];
         }
 
