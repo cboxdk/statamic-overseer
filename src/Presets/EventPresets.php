@@ -9,6 +9,11 @@ use Cboxdk\StatamicOverseer\EventHandlers\PasswordResetHandler;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetReplaced;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetReuploaded;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetUploaded;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionSaved;
@@ -45,11 +50,11 @@ class EventPresets
             \Statamic\Events\AssetContainerCreated::class => StatamicAssetContainerCreated::class,
             \Statamic\Events\AssetContainerDeleted::class => StatamicAssetContainerDeleted::class,
             \Statamic\Events\AssetContainerSaved::class => StatamicAssetContainerSaved::class,
-            //            \Statamic\Events\AssetDeleted::class => null,
-            //            \Statamic\Events\AssetReplaced::class => null,
-            //            \Statamic\Events\AssetReuploaded::class => null,
-            //            \Statamic\Events\AssetSaved::class => null,
-            //            \Statamic\Events\AssetUploaded::class => null,
+            \Statamic\Events\AssetDeleted::class => StatamicAssetDeleted::class,
+            \Statamic\Events\AssetReplaced::class => StatamicAssetReplaced::class,
+            \Statamic\Events\AssetReuploaded::class => StatamicAssetReuploaded::class,
+            \Statamic\Events\AssetSaved::class => StatamicAssetSaved::class,
+            \Statamic\Events\AssetUploaded::class => StatamicAssetUploaded::class,
             //            \Statamic\Events\BlueprintCreated::class => null,
             //            \Statamic\Events\BlueprintDeleted::class => null,
             //            \Statamic\Events\BlueprintSaved::class => null,
