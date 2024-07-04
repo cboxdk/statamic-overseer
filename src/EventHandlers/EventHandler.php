@@ -24,8 +24,8 @@ abstract class EventHandler
 
     abstract public function handle($event): void;
 
-    public function track(): void
+    public function track($type = 'event'): void
     {
-        Overseer::trackEvent(new Event('event', $this->event));
+        Overseer::trackEvent(new Event($type, $this->event));
     }
 }
