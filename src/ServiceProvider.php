@@ -2,10 +2,26 @@
 
 namespace Cboxdk\StatamicOverseer;
 
+use Statamic\Facades\CP\Nav;
 use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
 {
+    protected $routes = [
+        'cp' => __DIR__.'/../routes/cp.php',
+    ];
+
+    protected $scopes = [
+        Scopes\OverseerDate::class,
+    ];
+
+    protected $vite = [
+        'input' => [
+            'resources/js/addon.js',
+        ],
+        'publicDirectory' => 'resources/dist',
+    ];
+
     public function boot(): void
     {
         parent::boot();
@@ -43,6 +59,21 @@ class ServiceProvider extends AddonServiceProvider
     {
         $this->app->bind('Overseer', function () {
             return new Overseer();
+        });
+
+        Nav::extend(function ($nav) {
+            $nav->create('Audits')
+                ->section('Overseer')
+                ->route('overseer.audits.index')
+                ->icon('content-writing');
+            $nav->create('Events')
+                ->section('Overseer')
+                ->route('overseer.events.index')
+                ->icon('time');
+            $nav->create('Executions')
+                ->section('Overseer')
+                ->route('overseer.executions.index')
+                ->icon('array');
         });
     }
 }

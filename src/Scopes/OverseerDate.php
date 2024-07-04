@@ -4,7 +4,7 @@ namespace Cboxdk\StatamicOverseer\Scopes;
 
 use Statamic\Query\Scopes\Filter;
 
-class StatamicOverseerFilter extends Filter
+class OverseerDate extends Filter
 {
     /**
      * Pin the filter.
@@ -74,6 +74,6 @@ class StatamicOverseerFilter extends Filter
      */
     public function visibleTo($key)
     {
-        // return $key === 'entries';
+        return $key === 'overseer_audit' || $key === 'overseer_event' || $key === 'overseer_execution';
     }
 }
