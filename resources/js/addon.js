@@ -1,5 +1,9 @@
-import StatamicOverseer from './components/fieldtypes/StatamicOverseer.vue'
+import ExecutionsListing from './components/executions/Listing.vue';
+import EventsListing from './components/events/Listing.vue';
+import AuditsListing from './components/audits/Listing.vue';
 
 Statamic.booting(() => {
-    Statamic.component('statamic_overseer-fieldtype', StatamicOverseer)
+    Statamic.component('overseer-executions-listing', ExecutionsListing)
+    Statamic.component('overseer-events-listing', EventsListing)
+    Statamic.component('overseer-audits-listing', AuditsListing)
 })

@@ -28,6 +28,7 @@ class OverseerExecution extends Model
     ];
 
     protected $casts = [
+        'id' => 'string',
         'data' => 'array',
     ];
 
