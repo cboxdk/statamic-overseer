@@ -136,9 +136,11 @@ class Overseer
                             'impersonator_id' => $impersonator->id ?? null,
                             'type' => $eventData->type,
                             'event' => $eventData->content,
-                            'recorded_at' => $eventData->recordedAt,
+                            'recorded_at' => $eventData->recordedAt->format('Y-m-d H:i:s.u'),
                         ]);
+                        dump($event->toArray());
                         $event->save();
+                        dump($event->toArray());
                     }
                 });
             }

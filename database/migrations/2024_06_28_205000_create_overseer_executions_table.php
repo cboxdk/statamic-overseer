@@ -29,7 +29,7 @@ return new class extends Migration
             $table->float('cpu_user_time')->nullable();
             $table->float('cpu_system_time')->nullable();
             $table->float('cpu_usage_percentage')->nullable();
-            $table->timestamps(6);
+            $table->timestamps();
         });
     }
 
