@@ -99,11 +99,9 @@ class Overseer
                 // Do nothing.
             }
 
-            dump($user->id);
-
             // Persist to local storage
             if (config('statamic.overseer.storage.enabled')) {
-                rescue(function() use (&$executionId, &$duration, &$memory, &$cpuUsage) {
+                rescue(function() use (&$executionId, &$duration, &$memory, &$cpuUsage, &$user, &$impersonator) {
                     $execution = new OverseerExecution();
                     $execution->fill([
                         'execution_id' => $executionId,
@@ -140,7 +138,9 @@ class Overseer
                             'event' => $eventData->content,
                             'recorded_at' => $eventData->recordedAt,
                         ]);
+                        dump($event->toArray());
                         $event->save();
+                        dump($event->toArray());
                     }
                 });
             }
