@@ -35,25 +35,28 @@ To install Overseer for Statamic, follow these steps:
 ```bash
 composer require cboxdk/statamic-overseer
 ```
-
-Add the Overseer addon to your Statamic project using Composer:
-
-```bash
-composer require cboxdk/statamic-overseer
-```
-Publish the addon configuration:
-
+2. Optionally publish the addon configuration:
 ```bash
 php artisan vendor:publish --tag=statamic-overseer-config
 ```
+3. Configure the database connection if you want something else than the default connection  
+E.g. for flatfile setup you you may want to use sqlite.  
+For high traffic sites you may want to use secondary database for logging.
 
+4. Run the database migration
+```bash
+php artisan migrate
+```
+
+## Storage
 Configure the database connection to be used in the `config/statamic/overseer.php` file according to your preferred database system (SQLite, MySQL, PostgreSQL, etc.).  
 Remember to configure your connection in the default `config/databases.php`
 
 (Optional) Configure cloud server settings if you plan to use the cloud integration for long-term storage and analysis.
 
 ## Configuration Example
-The configuration file (config/statamic-overseer.php) allows you to enable or disable Overseer, set storage options, and configure individual trackers:
+The configuration file (`config/statamic/overseer.php`) allows you to enable or disable Overseer, set storage options, and configure individual trackers.    
+You don't have to change the file, but can just set the .env variables to configure the addon.
 
 ```php
 <?php
