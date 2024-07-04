@@ -26,6 +26,8 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupDeleted;
@@ -89,6 +91,8 @@ class EventPresets
             \Statamic\Events\NavSaved::class => GenericHandler::class,
             \Statamic\Events\NavTreeDeleted::class => GenericHandler::class,
             \Statamic\Events\NavTreeSaved::class => GenericHandler::class,
+            \Statamic\Events\RevisionSaved::class => StatamicRevisionSaved::class,
+            \Statamic\Events\RevisionDeleted::class => StatamicRevisionDeleted::class,
             \Statamic\Events\RoleDeleted::class => GenericHandler::class,
             \Statamic\Events\RoleSaved::class => GenericHandler::class,
             \Statamic\Events\TaxonomyCreated::class => GenericHandler::class,
