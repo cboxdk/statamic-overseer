@@ -35,6 +35,8 @@ class FailedLoginHandler extends EventHandler
         Overseer::addMessage(new Audit(
             message: 'Login failed',
             properties: $properties,
+            model_type: 'user',
+            model_id: $user->id ?? null
         ));
     }
 }

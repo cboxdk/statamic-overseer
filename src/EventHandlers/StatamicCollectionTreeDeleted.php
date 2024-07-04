@@ -20,7 +20,8 @@ class StatamicCollectionTreeDeleted extends EventHandler
             properties: [
                 'collection' => $event->tree->toArray(),
             ],
-            tree: $event->tree->handle(),
+            model_type: 'tree',
+            model_id: $event->tree->handle(),
         ));
     }
 }

@@ -20,6 +20,8 @@ class StatamicBlueprintDeleted extends EventHandler
             properties: [
                 'blueprint' => $event->blueprint->toArray(),
             ],
+            model_type: 'blueprint',
+            model_id: $event->blueprint->handle(),
         ));
     }
 }

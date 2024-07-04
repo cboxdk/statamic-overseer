@@ -20,7 +20,8 @@ class StatamicUserGroupDeleted extends EventHandler
             properties: [
                 'user_group' => $event->group->toArray(),
             ],
-            groups: $event->group->id(),
+            model_type: 'group',
+            model_id: $event->group->id,
         ));
     }
 }

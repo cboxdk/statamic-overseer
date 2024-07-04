@@ -20,6 +20,8 @@ class StatamicUserSaved extends EventHandler
             properties: [
                 'user' => $event->user->toArray(),
             ],
+            model_type: 'user',
+            model_id: $event->user->id,
         ));
     }
 }

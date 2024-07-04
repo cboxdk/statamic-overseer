@@ -20,7 +20,8 @@ class StatamicCollectionDeleted extends EventHandler
             properties: [
                 'collection' => $event->collection->toArray(),
             ],
-            collection: $event->collection->handle(),
+            model_type: 'collection',
+            model_id: $event->collection->handle(),
         ));
     }
 }

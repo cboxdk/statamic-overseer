@@ -20,7 +20,8 @@ class StatamicAssetContainerDeleted extends EventHandler
             properties: [
                 'collection' => $event->container->toArray(),
             ],
-            asset_container: $event->container->handle(),
+            model_type: 'asset_container',
+            model_id: $event->container->handle(),
         ));
     }
 }

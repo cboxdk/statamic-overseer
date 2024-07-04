@@ -20,8 +20,9 @@ class StatamicAssetSaved extends EventHandler
             properties: [
                 'asset' => $event->asset->toArray(),
             ],
-            asset_container: $event->asset->container()->handle(),
-            asset_id: $event->asset->id(),
+            model_type: 'asset',
+            model_handle: $event->asset->container()->handle(),
+            model_id: $event->asset->id(),
         ));
     }
 }

@@ -5,6 +5,7 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\BlueprintCreated;
+use Statamic\Fields\Blueprint;
 
 class StatamicBlueprintCreated extends EventHandler
 {
@@ -15,11 +16,17 @@ class StatamicBlueprintCreated extends EventHandler
     {
         $this->track();
 
+        /** @var Blueprint $blueprint */
+        $blueprint = $event->blueprint;
+        $blueprint->
+
         Overseer::addMessage(new Audit(
             message: 'Blueprint created',
             properties: [
                 'blueprint' => $event->blueprint->toArray(),
             ],
+            model_type: 'blueprint',
+            model_id: $event->blueprint->handle(),
         ));
     }
 }

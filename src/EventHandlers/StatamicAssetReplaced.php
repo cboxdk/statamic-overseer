@@ -21,8 +21,9 @@ class StatamicAssetReplaced extends EventHandler
                 'asset' => $event->newAsset->toArray(),
                 'original' => $event->originalAsset->toArray(),
             ],
-            asset_container: $event->newAsset->container()->handle(),
-            asset_id: $event->newAsset->id(),
+            model_type: 'asset',
+            model_handle: $event->newAsset->container()->handle(),
+            model_id: $event->newAsset->id(),
         ));
     }
 }

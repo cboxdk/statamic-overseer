@@ -21,8 +21,9 @@ class StatamicEntryDeleted extends EventHandler
                 'entry' => $event->entry->toArray(),
             ],
             site: $event->entry->site()->handle(),
-            collection: $event->entry->collection()->handle(),
-            entry_id: $event->entry->id(),
+            model_type: 'entry',
+            model_handle: $event->entry->collection()->handle(),
+            model_id: $event->entry->id(),
         ));
     }
 }

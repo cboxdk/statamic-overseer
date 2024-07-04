@@ -4,24 +4,24 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Statamic\Events\UserDeleted;
+use Statamic\Events\AssetUploaded;
 
-class StatamicUserDeleted extends EventHandler
+class StatamicFieldsetDeleted extends EventHandler
 {
     /**
-     * @param  UserDeleted  $event
+     * @param  AssetUploaded  $event
      */
     public function handle($event): void
     {
         $this->track();
 
         Overseer::addMessage(new Audit(
-            message: 'User deleted',
+            message: 'Asset uploaded',
             properties: [
-                'user' => $event->user->toArray(),
+                'asset' => $event->asset->toArray(),
             ],
-            model_type: 'user',
-            model_id: $event->user->id,
+            asset_container: $event->asset->container()->handle(),
+            asset_id: $event->asset->id(),
         ));
     }
 }

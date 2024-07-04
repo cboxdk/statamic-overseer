@@ -18,7 +18,8 @@ class StatamicCollectionTreeSaved extends EventHandler
         Overseer::addMessage(new Audit(
             message: 'Collection tree saved',
             site: $event->tree->site()->handle(),
-            tree: $event->tree->handle()
+            model_type: 'tree',
+            model_id: $event->tree->handle(),
         ));
     }
 }

@@ -17,6 +17,11 @@ class LoginHandler extends EventHandler
 
         Overseer::addMessage(new Audit(
             message: 'User logged in',
+            properties: [
+                'guard' => $event->guard,
+            ],
+            model_type: 'user',
+            model_id: $event->user->getAuthIdentifier(),
         ));
     }
 }

@@ -4,6 +4,7 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
+use Statamic\Assets\Asset;
 use Statamic\Events\AssetUploaded;
 
 class StatamicAssetDeleted extends EventHandler
@@ -20,8 +21,9 @@ class StatamicAssetDeleted extends EventHandler
             properties: [
                 'asset' => $event->asset->toArray(),
             ],
-            asset_container: $event->asset->container()->handle(),
-            asset_id: $event->asset->id(),
+            model_type: 'asset',
+            model_handle: $event->asset->container()->handle(),
+            model_id: $event->asset->id(),
         ));
     }
 }

@@ -134,7 +134,6 @@ class Overseer
                             'impersonator_id' => $impersonator->id ?? null,
                             ...$event->toArray(),
                         ]);
-                        //dump($audit->toArray());
                         $audit->save();
                     }
 

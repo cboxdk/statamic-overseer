@@ -6,7 +6,7 @@ use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\AssetUploaded;
 
-class StatamicAssetUploaded extends EventHandler
+class StatamicFieldsetCreated extends EventHandler
 {
     /**
      * @param  AssetUploaded  $event
