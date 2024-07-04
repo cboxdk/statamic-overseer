@@ -16,7 +16,6 @@ return new class extends Migration
         $schema = Schema::connection(config('statamic.overseer.storage.connection'));
         $schema->create('overseer_events', function (Blueprint $table) {
             $table->id();
-            $table->uuid()->nullable();
             $table->uuid('execution_id')->index();
             $table->uuid('user_id')->index()->nullable();
             $table->uuid('impersonator_id')->index()->nullable();

@@ -2,10 +2,21 @@
 
 namespace Cboxdk\StatamicOverseer\Presets;
 
+use Cboxdk\StatamicOverseer\EventHandlers\FailedLoginHandler;
 use Cboxdk\StatamicOverseer\EventHandlers\LoginHandler;
 use Cboxdk\StatamicOverseer\EventHandlers\LogoutHandler;
+use Cboxdk\StatamicOverseer\EventHandlers\PasswordResetHandler;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerCreated;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicAssetContainerSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionCreated;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionDeleted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
+use Statamic\Events\CollectionCreated;
 
 class EventPresets
 {
@@ -20,19 +31,20 @@ class EventPresets
     public static function authentication()
     {
         return [
-                        \Illuminate\Auth\Events\Login::class => LoginHandler::class,
-                        \Illuminate\Auth\Events\Logout::class => LogoutHandler::class,
-            //            \Illuminate\Auth\Events\Failed::class => null,
-            //            \Illuminate\Auth\Events\PasswordReset::class => null,
+            \Illuminate\Auth\Events\Login::class => LoginHandler::class,
+            \Illuminate\Auth\Events\Logout::class => LogoutHandler::class,
+            \Illuminate\Auth\Events\Failed::class => FailedLoginHandler::class,
+            \Illuminate\Auth\Events\PasswordReset::class => PasswordResetHandler::class, // not being called from Statamic
+            // todo: oauth events
         ];
     }
 
     public static function statamic()
     {
         return [
-            //            \Statamic\Events\AssetContainerCreated::class => null,
-            //            \Statamic\Events\AssetContainerDeleted::class => null,
-            //            \Statamic\Events\AssetContainerSaved::class => null,
+            \Statamic\Events\AssetContainerCreated::class => StatamicAssetContainerCreated::class,
+            \Statamic\Events\AssetContainerDeleted::class => StatamicAssetContainerDeleted::class,
+            \Statamic\Events\AssetContainerSaved::class => StatamicAssetContainerSaved::class,
             //            \Statamic\Events\AssetDeleted::class => null,
             //            \Statamic\Events\AssetReplaced::class => null,
             //            \Statamic\Events\AssetReuploaded::class => null,
@@ -41,13 +53,13 @@ class EventPresets
             //            \Statamic\Events\BlueprintCreated::class => null,
             //            \Statamic\Events\BlueprintDeleted::class => null,
             //            \Statamic\Events\BlueprintSaved::class => null,
-            //            \Statamic\Events\CollectionCreated::class => null,
-            //            \Statamic\Events\CollectionDeleted::class => null,
-            //            \Statamic\Events\CollectionSaved::class => null,
+            \Statamic\Events\CollectionCreated::class => StatamicCollectionCreated::class,
+            \Statamic\Events\CollectionDeleted::class => StatamicCollectionDeleted::class,
+            \Statamic\Events\CollectionSaved::class => StatamicCollectionSaved::class,
             //            \Statamic\Events\CollectionTreeDeleted::class => null,
             \Statamic\Events\CollectionTreeSaved::class => StatamicCollectionTreeSaved::class,
-            //            \Statamic\Events\EntryCreated::class => null,
-            //            \Statamic\Events\EntryDeleted::class => null,
+            \Statamic\Events\EntryCreated::class => StatamicEntryCreated::class,
+            \Statamic\Events\EntryDeleted::class => StatamicEntryDeleted::class,
             \Statamic\Events\EntrySaved::class => StatamicEntrySaved::class,
             //            \Statamic\Events\FieldsetCreated::class => null,
             //            \Statamic\Events\FieldsetDeleted::class => null,

@@ -49,6 +49,11 @@ class Overseer
         return config('statamic.overseer.server.enabled', false);
     }
 
+    public function setUser($user): void
+    {
+        self::$user = $user;
+    }
+
     public function trackEvent($event): void
     {
         if (!self::$user) {
