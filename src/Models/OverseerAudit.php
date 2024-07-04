@@ -7,7 +7,6 @@ use Statamic\Facades\User;
 
 class OverseerAudit extends Model
 {
-
     public function getConnectionName()
     {
         return config('statamic.overseer.storage.connection');

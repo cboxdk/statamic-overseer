@@ -7,7 +7,6 @@ use Statamic\Facades\User;
 
 class OverseerEvent extends Model
 {
-
     public function getConnectionName()
     {
         return config('statamic.overseer.storage.connection');
@@ -24,9 +23,8 @@ class OverseerEvent extends Model
 
     protected $casts = [
         'event' => 'array',
-        'recorded_at' => 'datetime:Y-m-d H:i:s.u'
+        'recorded_at' => 'datetime:Y-m-d H:i:s.u',
     ];
-
 
     public function user()
     {

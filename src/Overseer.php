@@ -2,7 +2,6 @@
 
 namespace Cboxdk\StatamicOverseer;
 
-use Cboxdk\StatamicOverseer\Jobs\PersistOverseerEvent;
 use Cboxdk\StatamicOverseer\Models\OverseerAudit;
 use Cboxdk\StatamicOverseer\Models\OverseerEvent;
 use Cboxdk\StatamicOverseer\Models\OverseerExecution;
@@ -81,7 +80,6 @@ class Overseer
             // set
             $executionId = Str::orderedUuid()->toString();
 
-
             // user
             $user = null;
             $impersonator = null;
@@ -101,7 +99,7 @@ class Overseer
 
             // Persist to local storage
             if (config('statamic.overseer.storage.enabled')) {
-                rescue(function() use (&$executionId, &$duration, &$memory, &$cpuUsage, &$user, &$impersonator) {
+                rescue(function () use (&$executionId, &$duration, &$memory, &$cpuUsage, &$user, &$impersonator) {
                     $execution = new OverseerExecution();
                     $execution->fill([
                         'execution_id' => $executionId,
@@ -115,15 +113,16 @@ class Overseer
                     ]);
                     $execution->save();
 
+                    /** @var Audit $event */
                     foreach (static::$audits as $event) {
                         $audit = new OverseerAudit();
                         $audit->fill([
                             'execution_id' => $executionId,
                             'user_id' => $user->id ?? null,
                             'impersonator_id' => $impersonator->id ?? null,
-                            'message' => $event->message,
-                            'properties' => $event->properties,
+                            ...$event->toArray(),
                         ]);
+                        dump($audit->toArray());
                         $audit->save();
                     }
 
@@ -145,12 +144,12 @@ class Overseer
                 });
             }
 
-//            $siteId = config('statamic.overseer.server.site');
-//            $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
-//
-//            // Send events to overseer
-//            $response = Http::withToken(config('statamic.overseer.server.token'))
-//                ->post($url, $payload);
+            //            $siteId = config('statamic.overseer.server.site');
+            //            $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
+            //
+            //            // Send events to overseer
+            //            $response = Http::withToken(config('statamic.overseer.server.token'))
+            //                ->post($url, $payload);
         }
     }
 

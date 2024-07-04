@@ -13,6 +13,7 @@ return new class extends Migration
     {
         return config('statamic.overseer.storage.connection');
     }
+
     public function up(): void
     {
         $schema = Schema::connection(config('statamic.overseer.storage.connection'));

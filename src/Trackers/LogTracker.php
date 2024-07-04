@@ -4,16 +4,12 @@ namespace Cboxdk\StatamicOverseer\Trackers;
 
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Log\Events\MessageLogged;
-use Illuminate\Support\Facades\Session;
-use Statamic\Support\Arr;
-use Statamic\Support\Str;
 use Psr\Log\LogLevel;
+use Statamic\Support\Arr;
 
 class LogTracker extends Tracker
 {
-
     /**
      * The available log level priorities.
      */
@@ -28,7 +24,6 @@ class LogTracker extends Tracker
         LogLevel::EMERGENCY => 600,
     ];
 
-
     public function register($app)
     {
         $app['events']->listen(MessageLogged::class, [$this, 'recordLog']);
@@ -40,14 +35,12 @@ class LogTracker extends Tracker
             return;
         }
 
-
-        $log = new Event('log',[
+        $log = new Event('log', [
             'level' => $event->level,
             'message' => (string) $event->message,
             'context' => Arr::except($event->context, []),
         ]);
         Overseer::trackEvent($log);
-
 
     }
 }

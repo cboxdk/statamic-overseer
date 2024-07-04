@@ -5,36 +5,27 @@ namespace Cboxdk\StatamicOverseer;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
-use Statamic\Support\Str;
 
 class Event implements Arrayable, JsonSerializable
 {
     /**
      * The entry's type.
-     *
-     * @var string
      */
     public string $type;
 
     /**
      * The entry's content.
-     *
-     * @var array
      */
     public array $content = [];
 
     /**
      * The DateTime that indicates when the entry was recorded.
-     *
-     * @var DateTimeInterface
      */
     public DateTimeInterface $recordedAt;
 
     /**
      * Create a new incoming entry instance.
      *
-     * @param  string $type
-     * @param array $content
      * @return void
      */
     public function __construct(string $type, array $content)

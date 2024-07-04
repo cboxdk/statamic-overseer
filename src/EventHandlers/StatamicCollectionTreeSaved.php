@@ -2,29 +2,23 @@
 
 namespace Cboxdk\StatamicOverseer\EventHandlers;
 
+use Cboxdk\StatamicOverseer\Audit;
+use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\CollectionTreeSaved;
 
 class StatamicCollectionTreeSaved extends EventHandler
 {
-
     /**
-     * @param CollectionTreeSaved $event
-     * @return void
+     * @param  CollectionTreeSaved  $event
      */
     public function handle($event): void
     {
-
-        $this->event = [
-            ...$this->event,
-            'id' => $event->tree->handle(),
-            'name' => \Statamic\Facades\Collection::find($event->tree->handle())->title(),
-            'site' => $event->tree->site()->handle(),
-        ];
         $this->track();
-        $this->audit('Collection tree saved', [
-            'id' => $event->tree->handle(),
-            'name' => \Statamic\Facades\Collection::find($event->tree->handle())->title(),
-            'site' => $event->tree->site()->handle(),
-        ]);
+
+        Overseer::addMessage(new Audit(
+            message: 'Collection tree saved',
+            site: $event->tree->site()->handle(),
+            tree: $event->tree->handle()
+        ));
     }
 }

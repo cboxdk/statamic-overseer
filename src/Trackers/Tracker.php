@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\Trackers;
 
 abstract class Tracker
 {
-
     /**
      * The configured watcher options.
      *
@@ -15,13 +14,13 @@ abstract class Tracker
     /**
      * Create a new watcher instance.
      *
-     * @param  array  $options
      * @return void
      */
     public function __construct(array $options = [])
     {
         $this->options = $options;
     }
+
     /**
      * Register the watcher.
      *

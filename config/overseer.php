@@ -38,7 +38,7 @@ return [
             'ignore_connections' => ['sqlite'],
             'slow_query_time' => 100,
             'log_only_write' => true,
-            'trace_max' => 20
+            'trace_max' => 20,
         ],
         \Cboxdk\StatamicOverseer\Trackers\LogTracker::class => [],
         \Cboxdk\StatamicOverseer\Trackers\EventTracker::class => [

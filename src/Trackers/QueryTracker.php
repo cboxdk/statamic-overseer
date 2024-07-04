@@ -5,12 +5,7 @@ namespace Cboxdk\StatamicOverseer\Trackers;
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Foundation\Http\Events\RequestHandled;
-use Illuminate\Log\Events\MessageLogged;
-use Illuminate\Support\Facades\Session;
-use Statamic\Support\Arr;
 use Statamic\Support\Str;
-use Psr\Log\LogLevel;
 
 class QueryTracker extends Tracker
 {
@@ -21,7 +16,7 @@ class QueryTracker extends Tracker
 
     public function recordQuery(QueryExecuted $event)
     {
-        if (! Overseer::isTracking() || !$this->shouldLog($event)) {
+        if (! Overseer::isTracking() || ! $this->shouldLog($event)) {
             return;
         }
 
@@ -55,7 +50,7 @@ class QueryTracker extends Tracker
             return false;
         }
 
-        if ($this->options['log_only_write'] && !$this->isWriteQuery($event->sql)) {
+        if ($this->options['log_only_write'] && ! $this->isWriteQuery($event->sql)) {
             return false;
         }
 
