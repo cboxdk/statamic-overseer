@@ -18,7 +18,7 @@ class StatamicRevisionDeleted extends EventHandler
         // Find the type and id
         $parts = explode('/', $event->revision->key());
         $collectionHandle = $parts[1] ?? null;
-        $entryId = $parts[3] ?? null;;
+        $entryId = $parts[3] ?? null;
 
         Overseer::addMessage(new Audit(
             message: 'Revision deleted',
