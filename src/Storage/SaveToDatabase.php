@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\Storage;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Event;
-use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Cboxdk\StatamicOverseer\Jobs\PersistOverseerEvent;
 use Cboxdk\StatamicOverseer\Models\OverseerAudit;
 use Cboxdk\StatamicOverseer\Models\OverseerEvent;
@@ -12,13 +11,12 @@ use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 
 class SaveToDatabase
 {
-
-    static public function queue(array $events, array $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator)
+    public static function queue(array $events, array $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator)
     {
         PersistOverseerEvent::dispatch($events, $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator);
     }
 
-    static public function sync(array $events, array $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator)
+    public static function sync(array $events, array $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator)
     {
         rescue(function () use ($events, $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator) {
             $execution = new OverseerExecution();

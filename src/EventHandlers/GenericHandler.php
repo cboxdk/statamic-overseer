@@ -7,7 +7,7 @@ use Statamic\Support\Str;
 class GenericHandler extends EventHandler
 {
     /**
-     * @param mixed $event
+     * @param  mixed  $event
      */
     public function handle($event): void
     {

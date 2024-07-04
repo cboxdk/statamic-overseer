@@ -2,12 +2,8 @@
 
 namespace Cboxdk\StatamicOverseer;
 
-use Cboxdk\StatamicOverseer\Models\OverseerAudit;
-use Cboxdk\StatamicOverseer\Models\OverseerEvent;
-use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 use Cboxdk\StatamicOverseer\Storage\SaveToDatabase;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Statamic\Facades\User;
 use Statamic\Support\Str;
 
