@@ -26,16 +26,13 @@ class PersistOverseerEvent implements ShouldQueue
      */
     public function handle(): void
     {
-        dump('re');
         rescue(function () {
             $siteId = config('statamic.overseer.server.site');
             $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
 
             // Send events to overseer
-            dump('send');
             $response = Http::withToken(config('statamic.overseer.server.token'))
                 ->post($url, $this->payload);
-            dump('er');
         });
     }
 }

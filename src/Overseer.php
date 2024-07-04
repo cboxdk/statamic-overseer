@@ -143,15 +143,12 @@ class Overseer
                 });
             }
 
-//            dump($payload);
 //            $siteId = config('statamic.overseer.server.site');
 //            $url = config('statamic.overseer.server.endpoint')."/api/sites/{$siteId}/events";
 //
 //            // Send events to overseer
-//            dump($payload);
 //            $response = Http::withToken(config('statamic.overseer.server.token'))
 //                ->post($url, $payload);
-//            dump($response->status());
         }
     }
 
