@@ -59,6 +59,15 @@ class ExecutionsController extends CpController
             // Column::make('pid')
             //     ->label(__('PID'))
             //     ->sortable(false),
+            Column::make('type')
+                ->label(__('Type'))
+                ->sortable(false),
+            Column::make('audit_count')
+                ->label(__('Audit Count'))
+                ->sortable(false),
+            Column::make('event_count')
+                ->label(__('Event Count'))
+                ->sortable(false),
             Column::make('duration')
                 ->label(__('Duration'))
                 ->numeric(true)

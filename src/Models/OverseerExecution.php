@@ -49,6 +49,38 @@ class OverseerExecution extends Model
         return $this->hasMany(OverseerEvent::class, 'execution_id', 'id')->orderBy('recorded_at');
     }
 
+    public function type()
+    {
+        if ($this->isRequest()) {
+            return 'request';
+        }
+
+        if ($this->isCommand()) {
+            return 'request';
+        }
+
+        if ($this->isJob()) {
+            return 'job';
+        }
+
+        return 'unknown';
+    }
+
+    public function isRequest()
+    {
+        return $this->events()->where('type', 'request')->exists();
+    }
+
+    public function isCommand()
+    {
+        return $this->events()->where('type', 'command')->exists();
+    }
+
+    public function isJob()
+    {
+        return $this->events()->where('type', 'job')->exists();
+    }
+
     public function user()
     {
         if ($this->user_id) {

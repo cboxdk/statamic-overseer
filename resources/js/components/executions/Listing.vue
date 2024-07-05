@@ -38,7 +38,9 @@
                             {{ subject(execution) }}
                         </template>
                         <template slot="cell-user" slot-scope="{ row: execution }">
-                            {{ execution.user.name }}
+                            <template v-if="execution.user">
+                              {{ execution.user.name }}
+                            </template>
                             <template v-if="execution.impersonator">
                                 (impersonated by {{ execution.impersonator.name }})
                             </template>

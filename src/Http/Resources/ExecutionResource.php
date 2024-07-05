@@ -10,6 +10,9 @@ class ExecutionResource extends JsonResource
     {
         return [
             ...parent::toArray($request),
+            'type' => $this->type(),
+            'event_count' => $this->events()->count(),
+            'audit_count' => $this->audits()->count(),
             'user' => $this->user(),
             'impersonator' => $this->impersonator(),
         ];

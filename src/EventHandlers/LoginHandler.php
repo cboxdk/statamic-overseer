@@ -13,6 +13,7 @@ class LoginHandler extends EventHandler
      */
     public function handle($event): void
     {
+        $this->event['guard'] = $event->guard;
         $this->track();
 
         Overseer::addMessage(new Audit(

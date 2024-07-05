@@ -7,7 +7,7 @@ use Cboxdk\StatamicOverseer\Facades\Overseer;
 
 abstract class EventHandler
 {
-    public $event = [];
+    public array $event = [];
 
     public function run($event)
     {
