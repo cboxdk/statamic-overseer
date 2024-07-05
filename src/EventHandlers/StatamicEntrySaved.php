@@ -35,8 +35,20 @@ class StatamicEntrySaved extends EventHandler
 
         $this->track();
 
+        $message = 'Entry saved ('. $entry->status() .')';
+        if ($entry->isDirty('published'))
+        {
+            if ($entry->status() === 'published') {
+                $message = 'Entry saved and published';
+            } elseif ($entry->status() === 'scheduled') {
+                $message = 'Entry saved and scheduled';
+            } elseif ($entry->status() === 'draft') {
+                $message = 'Entry saved and unpublished';
+            }
+        }
+
         Overseer::addMessage(new Audit(
-            message: 'Entry saved',
+            message: $message,
             properties: [
                 'status' => $entry->status(),
                 'published' => $entry->published(),

@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer\Trackers;
 
+use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -68,6 +69,27 @@ class RequestTracker extends Tracker
                 'updated_at' => now()->format('Y-m-d\TH:i:s.u'),
             ]);
             Overseer::trackEvent($event);
+
+
+            // Workaround for missing events
+            if ($request->path() === 'cp/users/actions' && $response->status() === 200)
+            {
+                $rawPayload = json_decode($request->getContent(), true);
+                if ($rawPayload['action'] === 'impersonate') {
+                    $userId = $rawPayload['selections'][0] ?? null;
+                    Overseer::addMessage(new Audit(
+                        message: 'Impersonated User',
+                        model_type: 'user',
+                        model_id: $userId,
+                    ));
+                }
+            }
+            if ($request->path() === 'cp/auth/stop-impersonating') {
+                Overseer::addMessage(new Audit(
+                    message: 'Stop impersonating User',
+                ));
+            }
+
         });
 
     }
