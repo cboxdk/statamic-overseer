@@ -6,9 +6,11 @@ use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RequestTracker extends Tracker
 {
@@ -62,6 +64,7 @@ class RequestTracker extends Tracker
                 'headers' => $this->headers($request->headers->all()),
                 'ip_address' => $request->getClientIp(),
                 'ip_addresses' => $request->ips(),
+                'response' => $this->response($event->response),
                 'response_code' => $response->status(),
                 'response_cache_hit' => $cachedResponse,
                 'middleware' => array_values(optional($request->route())->gatherMiddleware() ?? []),
@@ -133,6 +136,46 @@ class RequestTracker extends Tracker
     }
 
     /**
+     * Format the given response object.
+     *
+     * @param  \Symfony\Component\HttpFoundation\Response  $response
+     * @return array|string
+     */
+    protected function response(\Symfony\Component\HttpFoundation\Response $response)
+    {
+        $content = $response->getContent();
+
+        if (is_string($content)) {
+            if (is_array(json_decode($content, true)) &&
+                json_last_error() === JSON_ERROR_NONE) {
+                return $this->contentWithinLimits($content)
+                    ? $this->hideParameters(json_decode($content, true), $this->options['hide_parameters'])
+                    : 'Purged By Overseer';
+            }
+
+            if (Str::startsWith(strtolower($response->headers->get('Content-Type') ?? ''), 'text/plain')) {
+                return $this->contentWithinLimits($content) ? $content : 'Purged By Overseer';
+            }
+        }
+
+        if ($response instanceof RedirectResponse) {
+            return 'Redirected to '.$response->getTargetUrl();
+        }
+
+        if ($response instanceof Response && $response->getOriginalContent() instanceof View) {
+            return [
+                'view' => $response->getOriginalContent()->getPath(),
+            ];
+        }
+
+        if (is_string($content) && empty($content)) {
+            return 'Empty Response';
+        }
+
+        return 'HTML Response';
+    }
+
+    /**
      * Format the given headers.
      *
      * @param  array  $headers
@@ -165,5 +208,18 @@ class RequestTracker extends Tracker
         }
 
         return $data;
+    }
+
+    /**
+     * Determine if the content is within the set limits.
+     *
+     * @param  string  $content
+     * @return bool
+     */
+    public function contentWithinLimits($content)
+    {
+        $limit = $this->options['size_limit'] ?? 64;
+
+        return intdiv(mb_strlen($content), 1000) <= $limit;
     }
 }

@@ -7,6 +7,7 @@ use Cboxdk\StatamicOverseer\Http\Resources\AuditCollection;
 use Cboxdk\StatamicOverseer\Http\Resources\AuditResource;
 use Cboxdk\StatamicOverseer\Models\OverseerAudit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Statamic\CP\Column;
 use Statamic\Facades\Scope;
 use Statamic\Http\Controllers\CP\CpController;
@@ -57,6 +58,9 @@ class AuditsController extends CpController
                 ->sortable(false),
             Column::make('subject')
                 ->label(__('Subject'))
+                ->sortable(false),
+            Column::make('execution_id')
+                ->label(__('Execution'))
                 ->sortable(false),
             Column::make('user')
                 ->label(__('User'))
