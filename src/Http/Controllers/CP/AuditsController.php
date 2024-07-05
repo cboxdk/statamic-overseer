@@ -15,14 +15,9 @@ use Statamic\Http\Controllers\CP\CpController;
 class AuditsController extends CpController
 {
 
-    public function __construct()
-    {
-        $this->authorize('access overseer');
-    }
-
     public function index(Request $request)
     {
-        // $tis->authorize('index', AuditContract::class);
+        $this->authorize('viewAny', OverseerAudit::class);
 
         return view('statamic-overseer::audits.index', [
             'initialColumns' => $this->columns(),
@@ -32,7 +27,7 @@ class AuditsController extends CpController
 
     public function list(Request $request)
     {
-        // $this->authorize('index', AuditContract::class);
+        $this->authorize('viewAny', OverseerAudit::class);
 
         $query = OverseerAudit::query()
             ->orderBy($request->sort, $request->order);
@@ -49,7 +44,7 @@ class AuditsController extends CpController
 
     public function show(OverseerAudit $audit)
     {
-        // $this->authorize('index', \Tv2regionerne\StatamicAudit\Contracts\Post::class);
+        $this->authorize('view', $audit);
 
         return new AuditResource($audit);
     }

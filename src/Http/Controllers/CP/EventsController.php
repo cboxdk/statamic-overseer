@@ -14,14 +14,9 @@ use Statamic\Http\Controllers\CP\CpController;
 class EventsController extends CpController
 {
 
-    public function __construct()
-    {
-        $this->authorize('access overseer');
-    }
-
     public function index(Request $request)
     {
-        // $this->authorize('index', EventContract::class);
+        $this->authorize('viewAny', OverseerEvent::class);
 
         return view('statamic-overseer::events.index', [
             'initialColumns' => $this->columns(),
@@ -31,7 +26,7 @@ class EventsController extends CpController
 
     public function list(Request $request)
     {
-        // $this->authorize('index', EventContract::class);
+        $this->authorize('viewAny', OverseerEvent::class);
 
         $query = OverseerEvent::query()
             ->orderBy($request->sort, $request->order);
@@ -48,7 +43,7 @@ class EventsController extends CpController
 
     public function show(OverseerEvent $event)
     {
-        // $this->authorize('index', \Tv2regionerne\StatamicEvent\Contracts\Post::class);
+        $this->authorize('viewAny', $event);
 
         return new EventResource($event);
     }

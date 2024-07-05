@@ -2,6 +2,12 @@
 
 namespace Cboxdk\StatamicOverseer;
 
+use Cboxdk\StatamicOverseer\Models\OverseerAudit;
+use Cboxdk\StatamicOverseer\Models\OverseerEvent;
+use Cboxdk\StatamicOverseer\Models\OverseerExecution;
+use Cboxdk\StatamicOverseer\Policies\OverseerAuditPolicy;
+use Cboxdk\StatamicOverseer\Policies\OverseerEventPolicy;
+use Cboxdk\StatamicOverseer\Policies\OverseerExecutionPolicy;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Providers\AddonServiceProvider;
@@ -10,6 +16,12 @@ class ServiceProvider extends AddonServiceProvider
 {
     protected $routes = [
         'cp' => __DIR__.'/../routes/cp.php',
+    ];
+
+    protected $policies = [
+        OverseerAudit::class => OverseerAuditPolicy::class,
+        OverseerEvent::class => OverseerEventPolicy::class,
+        OverseerExecution::class => OverseerExecutionPolicy::class,
     ];
 
     protected $scopes = [
@@ -63,6 +75,7 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
+        $this->bootPermissions();
         $this->app->bind('Overseer', function () {
             return new Overseer();
         });

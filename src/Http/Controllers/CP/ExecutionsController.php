@@ -13,14 +13,9 @@ use Statamic\Http\Controllers\CP\CpController;
 class ExecutionsController extends CpController
 {
 
-    public function __construct()
-    {
-        $this->authorize('access overseer');
-    }
-
     public function index(Request $request)
     {
-        // $this->authorize('index', ExecutionContract::class);
+        $this->authorize('viewAny', OverseerExecution::class);
 
         return view('statamic-overseer::executions.index', [
             'initialColumns' => $this->columns(),
@@ -30,7 +25,7 @@ class ExecutionsController extends CpController
 
     public function list(Request $request)
     {
-        // $this->authorize('index', ExecutionContract::class);
+        $this->authorize('viewAny', OverseerExecution::class);
 
         $query = OverseerExecution::query()
             ->orderBy($request->sort, $request->order);
@@ -47,7 +42,7 @@ class ExecutionsController extends CpController
 
     public function show(OverseerExecution $execution)
     {
-        // $this->authorize('index', \Tv2regionerne\StatamicExecution\Contracts\Post::class);
+        $this->authorize('viewAny', $execution);
 
         return view('statamic-overseer::executions.show', [
             'execution' => $execution,
