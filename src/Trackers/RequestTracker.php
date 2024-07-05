@@ -65,7 +65,7 @@ class RequestTracker extends Tracker
                 'ip_address' => $request->getClientIp(),
                 'ip_addresses' => $request->ips(),
                 'response' => $this->response($event->response),
-                'response_code' => $response->status(),
+                'response_code' => $response->getStatusCode(),
                 'response_cache_hit' => $cachedResponse,
                 'middleware' => array_values(optional($request->route())->gatherMiddleware() ?? []),
                 'created_at' => now()->format('Y-m-d\TH:i:s.u'),
