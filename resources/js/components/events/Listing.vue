@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overseer-events-listing">
 
         <div v-if="initializing" class="w-full flex justify-center text-center">
             <loading-graphic />
@@ -31,11 +31,11 @@
                         @sorted="sorted">
                         <template slot="cell-created_at" slot-scope="{ row: event }">
                             <a :href="cp_url(`overseer/executions/${event.execution_id}`)" class="text-blue">
-                                {{ $moment(event.created_at).format('lll') }}
+                                {{ $moment(event.created_at).format('YYYY-MM-DD HH:MM') }}
                             </a>
                         </template>
-                        <template slot="cell-subject" slot-scope="{ row: event }">
-                            {{ subject(event) }}
+                        <template slot="cell-type" slot-scope="{ row: event }">
+                            <event-info :event="event" />
                         </template>
                         <template slot="cell-user" slot-scope="{ row: event }">
                             <template v-if="event.user">
@@ -70,9 +70,15 @@
 </template>
 
 <script>
+import EventInfo from './Info.vue';
+
 export default {
 
     mixins: [Listing],
+
+    components: {
+        EventInfo,
+    },
 
     props: ['initialColumns'],
 
@@ -87,27 +93,21 @@ export default {
 
     methods: {
 
-        subject(event) {
-            const mapping = {
-                collection: 'entry_id',
-                taxonomy: 'term_handle',
-                global: 'global_set',
-                asset_container: 'asset_id',
-                navigation: null,
-                tree: null,
-            };
-            const type = Object.keys(mapping).find(type => event[type]);
-            if (!type) {
-                return;
-            }
-            return [
-                type,
-                event[type],
-                mapping[type] ? event[mapping[type]] : null,
-            ].filter(item => item !== null).join(' / ');
-        },
 
     }
 
 }
 </script>
+<style>
+    .overseer-events-listing {
+        td, th {
+            white-space: nowrap;
+            &:not(:first-child) {
+                padding-left: 0;
+            }
+        }
+        .actions-column {
+            display: none;            
+        }
+    }
+</style>

@@ -2,7 +2,6 @@
 
 namespace Cboxdk\StatamicOverseer\Http\Controllers\CP;
 
-use Cboxdk\StatamicOverseer\Contracts\Event as EventContract;
 use Cboxdk\StatamicOverseer\Http\Resources\EventCollection;
 use Cboxdk\StatamicOverseer\Http\Resources\EventResource;
 use Cboxdk\StatamicOverseer\Models\OverseerEvent;
@@ -13,7 +12,6 @@ use Statamic\Http\Controllers\CP\CpController;
 
 class EventsController extends CpController
 {
-
     public function index(Request $request)
     {
         $this->authorize('viewAny', OverseerEvent::class);

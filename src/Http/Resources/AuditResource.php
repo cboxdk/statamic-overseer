@@ -12,6 +12,7 @@ class AuditResource extends JsonResource
             ...parent::toArray($request),
             'user' => $this->user(),
             'impersonator' => $this->impersonator(),
+            'initiator' => $this->initiator(),
         ];
     }
 }

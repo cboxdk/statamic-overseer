@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overseer-audits-listing">
 
         <div v-if="initializing" class="w-full flex justify-center text-center">
             <loading-graphic />
@@ -31,8 +31,11 @@
                         @sorted="sorted">
                         <template slot="cell-created_at" slot-scope="{ row: audit }">
                             <a :href="cp_url(`overseer/executions/${audit.execution_id}`)" class="text-blue">
-                                {{ $moment(audit.created_at).format('lll') }}
+                                {{ $moment(audit.created_at).format('YYYY-MM-DD HH:MM') }}
                             </a>
+                        </template>
+                        <template slot="cell-initiator" slot-scope="{ row: audit }">
+                            <event-info :event="audit.initiator" />
                         </template>
                         <template slot="cell-subject" slot-scope="{ row: audit }">
                             {{ subject(audit) }}
@@ -64,9 +67,15 @@
 </template>
 
 <script>
+import EventInfo from '../events/Info.vue';
+
 export default {
 
     mixins: [Listing],
+
+    components: {
+        EventInfo,
+    },
 
     props: ['initialColumns'],
 
@@ -93,3 +102,16 @@ export default {
 
 }
 </script>
+<style>
+    .overseer-audits-listing {
+        td, th {
+            white-space: nowrap;
+            &:not(:first-child) {
+                padding-left: 0;
+            }
+        }
+        .actions-column {
+            display: none;            
+        }
+    }
+</style>

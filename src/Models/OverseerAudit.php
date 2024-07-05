@@ -44,6 +44,11 @@ class OverseerAudit extends Model
 
     public function execution()
     {
-        return $this->belongsTo(OverseerExecution::class, 'id', 'execution_id');
+        return $this->belongsTo(OverseerExecution::class, 'execution_id', 'id');
+    }
+
+    public function initiator()
+    {
+        return $this->execution()->first()?->initiator();
     }
 }

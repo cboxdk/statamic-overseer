@@ -2,7 +2,6 @@
 
 namespace Cboxdk\StatamicOverseer\Http\Controllers\CP;
 
-use Cboxdk\StatamicOverseer\Contracts\Execution as ExecutionContract;
 use Cboxdk\StatamicOverseer\Http\Resources\ExecutionCollection;
 use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 use Illuminate\Http\Request;
@@ -12,7 +11,6 @@ use Statamic\Http\Controllers\CP\CpController;
 
 class ExecutionsController extends CpController
 {
-
     public function index(Request $request)
     {
         $this->authorize('viewAny', OverseerExecution::class);
@@ -54,20 +52,12 @@ class ExecutionsController extends CpController
         return [
             Column::make('created_at')
                 ->label(__('Date')),
-            // Column::make('host')
-            //     ->label(__('Host'))
-            //     ->sortable(false),
-            // Column::make('pid')
-            //     ->label(__('PID'))
-            //     ->sortable(false),
-            Column::make('type')
-                ->label(__('Type'))
+            Column::make('initiator')
+                ->label(__('Initiator'))
                 ->sortable(false),
-            Column::make('audit_count')
-                ->label(__('Audit Count'))
-                ->sortable(false),
-            Column::make('event_count')
-                ->label(__('Event Count'))
+            Column::make('counts')
+                ->label(__('Counts'))
+                ->numeric(true)
                 ->sortable(false),
             Column::make('duration')
                 ->label(__('Duration'))
@@ -77,16 +67,8 @@ class ExecutionsController extends CpController
                 ->label(__('Memory'))
                 ->numeric(true)
                 ->sortable(false),
-            Column::make('cpu_user_time')
-                ->label(__('CPU User Time'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('cpu_system_time')
-                ->label(__('CPU System Time'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('cpu_usage_percentage')
-                ->label(__('CPU Usage Percentage'))
+            Column::make('cpu')
+                ->label(__('CPU Times / Usage'))
                 ->numeric(true)
                 ->sortable(false),
             Column::make('user')

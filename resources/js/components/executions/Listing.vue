@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overseer-executions-listing">
 
         <div v-if="initializing" class="w-full flex justify-center text-center">
             <loading-graphic />
@@ -31,18 +31,34 @@
                         @sorted="sorted">
                         <template slot="cell-created_at" slot-scope="{ row: execution }">
                             <a :href="cp_url(`overseer/executions/${execution.id}`)" class="text-blue">
-                                {{ $moment(execution.created_at).format('lll') }}
+                                {{ $moment(execution.created_at).format('YYYY-MM-DD HH:MM') }}
                             </a>
                         </template>
-                        <template slot="cell-subject" slot-scope="{ row: execution }">
-                            {{ subject(execution) }}
+                        <template slot="cell-initiator" slot-scope="{ row: execution }">
+                            <event-info :event="execution.initiator" />
+                        </template>
+                        <template slot="cell-duration" slot-scope="{ row: execution }">
+                            {{ execution.duration }} ms
+                        </template>
+                        <template slot="cell-memory" slot-scope="{ row: execution }">
+                            {{ execution.memory }} mb
+                        </template>
+                        <template slot="cell-counts" slot-scope="{ row: execution }">
+                            {{ execution.audit_count }} au / 
+                            {{ execution.event_count }} ev
+                        </template>
+                        <template slot="cell-cpu" slot-scope="{ row: execution }">
+                            {{ execution.cpu_user_time.toFixed(3) }} /
+                            {{ execution.cpu_system_time.toFixed(3) }} /
+                            {{ execution.cpu_usage_percentage.toFixed() }}%
                         </template>
                         <template slot="cell-user" slot-scope="{ row: execution }">
                             <template v-if="execution.user">
                               {{ execution.user.name }}
                             </template>
                             <template v-if="execution.impersonator">
-                                (impersonated by {{ execution.impersonator.name }})
+                                <br>
+                                ({{ execution.impersonator.name }})
                             </template>
                         </template>
                     </data-list-table>
@@ -70,9 +86,15 @@
 </template>
 
 <script>
+import EventInfo from '../events/Info.vue';
+
 export default {
 
     mixins: [Listing],
+
+    components: {
+        EventInfo,
+    },
 
     props: ['initialColumns'],
 
@@ -87,27 +109,20 @@ export default {
 
     methods: {
 
-        subject(execution) {
-            const mapping = {
-                collection: 'entry_id',
-                taxonomy: 'term_handle',
-                global: 'global_set',
-                asset_container: 'asset_id',
-                navigation: null,
-                tree: null,
-            };
-            const type = Object.keys(mapping).find(type => execution[type]);
-            if (!type) {
-                return;
-            }
-            return [
-                type,
-                execution[type],
-                mapping[type] ? execution[mapping[type]] : null,
-            ].filter(item => item !== null).join(' / ');
-        },
-
     }
 
 }
 </script>
+<style>
+    .overseer-executions-listing {
+        td, th {
+            white-space: nowrap;
+            &:not(:first-child) {
+                padding-left: 0;
+            }
+        }
+        .actions-column {
+            display: none;            
+        }
+    }
+</style>
