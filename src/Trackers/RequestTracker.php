@@ -73,10 +73,8 @@ class RequestTracker extends Tracker
             ]);
             Overseer::trackEvent($event);
 
-
             // Workaround for missing events
-            if ($request->path() === 'cp/users/actions' && $response->status() === 200)
-            {
+            if ($request->path() === 'cp/users/actions' && $response->status() === 200) {
                 $rawPayload = json_decode($request->getContent(), true);
                 if ($rawPayload['action'] === 'impersonate') {
                     $userId = $rawPayload['selections'][0] ?? null;
@@ -131,14 +129,13 @@ class RequestTracker extends Tracker
     protected function payload($payload)
     {
         return $this->hideParameters($payload,
-            $this->options['hide_parameters']
+            $this->options['hide_parameters'] ?? []
         );
     }
 
     /**
      * Format the given response object.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
      * @return array|string
      */
     protected function response(\Symfony\Component\HttpFoundation\Response $response)
@@ -149,7 +146,7 @@ class RequestTracker extends Tracker
             if (is_array(json_decode($content, true)) &&
                 json_last_error() === JSON_ERROR_NONE) {
                 return $this->contentWithinLimits($content)
-                    ? $this->hideParameters(json_decode($content, true), $this->options['hide_parameters'])
+                    ? $this->hideParameters(json_decode($content, true), $this->options['hide_parameters'] ?? [])
                     : 'Purged By Overseer';
             }
 
@@ -188,7 +185,7 @@ class RequestTracker extends Tracker
             ->all();
 
         return $this->hideParameters($headers,
-            $this->options['hide_headers']
+            $this->options['hide_headers'] ?? []
         );
     }
 
