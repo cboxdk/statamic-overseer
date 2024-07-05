@@ -3,6 +3,7 @@
 namespace Cboxdk\StatamicOverseer;
 
 use Statamic\Facades\CP\Nav;
+use Statamic\Facades\Permission;
 use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
@@ -69,16 +70,32 @@ class ServiceProvider extends AddonServiceProvider
         Nav::extend(function ($nav) {
             $nav->create('Audits')
                 ->section('Overseer')
+                ->can('access overseer')
                 ->route('overseer.audits.index')
                 ->icon('content-writing');
             $nav->create('Events')
                 ->section('Overseer')
+                ->can('access overseer')
                 ->route('overseer.events.index')
                 ->icon('time');
             $nav->create('Executions')
                 ->section('Overseer')
+                ->can('access overseer')
                 ->route('overseer.executions.index')
                 ->icon('array');
         });
+    }
+
+    protected function bootPermissions(): self
+    {
+        Permission::group('overseer', 'Overseer', function () {
+            Permission::register('access overseer', function ($permission) {
+                $permission
+                    ->label('Access to overseer data')
+                    ->description('Grants access to view audits, events and executions');
+            });
+        });
+
+        return $this;
     }
 }

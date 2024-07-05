@@ -12,6 +12,12 @@ use Statamic\Http\Controllers\CP\CpController;
 
 class ExecutionsController extends CpController
 {
+
+    public function __construct()
+    {
+        $this->authorize('access overseer');
+    }
+
     public function index(Request $request)
     {
         // $this->authorize('index', ExecutionContract::class);

@@ -14,9 +14,15 @@ use Statamic\Http\Controllers\CP\CpController;
 
 class AuditsController extends CpController
 {
+
+    public function __construct()
+    {
+        $this->authorize('access overseer');
+    }
+
     public function index(Request $request)
     {
-        // $this->authorize('index', AuditContract::class);
+        // $tis->authorize('index', AuditContract::class);
 
         return view('statamic-overseer::audits.index', [
             'initialColumns' => $this->columns(),
