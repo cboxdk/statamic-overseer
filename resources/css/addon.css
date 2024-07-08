@@ -16,7 +16,7 @@
 }
 
 .overseer-max {
-    max-width: 60ch;
+    max-width: 40ch;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
