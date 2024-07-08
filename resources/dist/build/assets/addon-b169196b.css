@@ -1,0 +1,1 @@
+.overseer-table{overflow:auto;td,th {white-space: nowrap; vertical-align: top; &:not(:first-child) {padding-left: 0;} &:nth-last-child(2) {text-align: right;}} .actions-column {display: none;}}.overseer-max{max-width:40ch;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
