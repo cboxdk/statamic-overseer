@@ -49,13 +49,10 @@ class EventsController extends CpController
     protected function columns()
     {
         return [
-            Column::make('created_at')
-                ->label(__('Date')),
+            Column::make('recorded_at')
+                ->label(__('Recorded')),
             Column::make('type')
                 ->label(__('Type'))
-                ->sortable(false),
-            Column::make('recorded_at')
-                ->label(__('Recorded'))
                 ->sortable(false),
             Column::make('user')
                 ->label(__('User'))

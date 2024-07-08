@@ -1,5 +1,5 @@
 <template>
-    <div class="overseer-audits-listing">
+    <div class="overseer-listing">
 
         <div v-if="initializing" class="w-full flex justify-center text-center">
             <loading-graphic />
@@ -27,28 +27,28 @@
                         @changed="filterChanged"
                     />
 
-                    <data-list-table
-                        @sorted="sorted">
-                        <template slot="cell-created_at" slot-scope="{ row: audit }">
-                            <a :href="cp_url(`overseer/executions/${audit.execution_id}`)" class="text-blue">
-                                {{ $moment(audit.created_at).format('YYYY-MM-DD HH:MM') }}
-                            </a>
-                        </template>
-                        <template slot="cell-initiator" slot-scope="{ row: audit }">
-                            <event-info :event="audit.initiator" />
-                        </template>
-                        <template slot="cell-subject" slot-scope="{ row: audit }">
-                            {{ subject(audit) }}
-                        </template>
-                        <template slot="cell-user" slot-scope="{ row: audit }">
-                            <template v-if="audit.user">
-                              {{ audit.user.name }}
+                    <div class="overseer-table">
+                        <data-list-table
+                            @sorted="sorted">
+                            <template slot="cell-created_at" slot-scope="{ row: audit }">
+                                <a :href="cp_url(`overseer/executions/${audit.execution_id}`)" class="text-blue">
+                                    {{ $moment(audit.created_at).format('YYYY-MM-DD HH:mm:ss.SSSS') }}
+                                </a>
+                                <div class="text-2xs opacity-75">
+                                    {{ audit.execution_id }}
+                                </div>
                             </template>
-                            <template v-if="audit.impersonator">
-                                (impersonated by {{ audit.impersonator.name }})
+                            <template slot="cell-initiator" slot-scope="{ row: audit }">
+                                <event-info :event="audit.initiator" />
                             </template>
-                        </template>
-                    </data-list-table>
+                            <template slot="cell-subject" slot-scope="{ row: audit }">
+                                <subject :audit="audit" />
+                            </template>
+                            <template slot="cell-user" slot-scope="{ row: audit }">
+                                <user :user="audit.user" :impersonator="audit.impersonator" />
+                            </template>
+                        </data-list-table>
+                    </div>
                 </div>
 
                 <data-list-pagination
@@ -67,7 +67,9 @@
 </template>
 
 <script>
+import User from '../common/User.vue';
 import EventInfo from '../events/Info.vue';
+import Subject from './Subject.vue';
 
 export default {
 
@@ -75,6 +77,8 @@ export default {
 
     components: {
         EventInfo,
+        User,
+        Subject,
     },
 
     props: ['initialColumns'],
@@ -102,16 +106,3 @@ export default {
 
 }
 </script>
-<style>
-    .overseer-audits-listing {
-        td, th {
-            white-space: nowrap;
-            &:not(:first-child) {
-                padding-left: 0;
-            }
-        }
-        .actions-column {
-            display: none;            
-        }
-    }
-</style>

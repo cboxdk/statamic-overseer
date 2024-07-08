@@ -1,3 +1,5 @@
+import '../css/addon.css';
+
 import ExecutionsListing from './components/executions/Listing.vue';
 import EventsListing from './components/events/Listing.vue';
 import AuditsListing from './components/audits/Listing.vue';

@@ -3,6 +3,10 @@
 namespace Cboxdk\StatamicOverseer\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Statamic\Facades\Asset;
+use Statamic\Facades\Blueprint;
+use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 use Statamic\Facades\User;
 
 class OverseerAudit extends Model
@@ -50,5 +54,17 @@ class OverseerAudit extends Model
     public function initiator()
     {
         return $this->execution()->first()?->initiator();
+    }
+
+    public function subject()
+    {
+        return match ($this->model_type) {
+            'entry' => Entry::find($this->model_id),
+            'term' => Term::find($this->model_id.':'.$this->model_handle),
+            'asset' => Asset::find($this->model_id.':'.$this->model_handle),
+            'user' => User::find($this->model_id),
+            'blueprint' => Blueprint::find($this->model_id),
+            default => null,
+        };
     }
 }

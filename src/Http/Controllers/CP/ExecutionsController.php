@@ -55,21 +55,8 @@ class ExecutionsController extends CpController
             Column::make('initiator')
                 ->label(__('Initiator'))
                 ->sortable(false),
-            Column::make('counts')
-                ->label(__('Counts'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('duration')
-                ->label(__('Duration'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('memory')
-                ->label(__('Memory'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('cpu')
-                ->label(__('CPU Times / Usage'))
-                ->numeric(true)
+            Column::make('stats')
+                ->label(__('Stats'))
                 ->sortable(false),
             Column::make('user')
                 ->label(__('User'))

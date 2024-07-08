@@ -13,6 +13,7 @@ class AuditResource extends JsonResource
             'user' => $this->user(),
             'impersonator' => $this->impersonator(),
             'initiator' => $this->initiator(),
+            'subject' => $this->subject(),
         ];
     }
 }

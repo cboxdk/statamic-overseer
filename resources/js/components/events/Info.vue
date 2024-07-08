@@ -7,19 +7,21 @@
                 {{ event.event.method }} /
                 {{ event.event.response_code }} /
                 {{ response_cache_hit ? 'Hit' : 'Miss' }}
-                <div class="overseer-info opacity-75">{{ event.event.url }}</div>
+                <div class="text-2xs opacity-75 overseer-max">
+                    <a :href="event.event.url" class="text-gray-700">{{ urlPath(event.event.url) }}</a>
+                </div>
             </template>
             <template v-else-if="event.type === 'job'">
                 <span class="font-semibold">Job</span>
-                <div class="overseer-info opacity-75">{{ event.event.name }}</div>
+                <div class="text-2xs opacity-75">{{ event.event.name }}</div>
             </template>
             <template v-else-if="event.type === 'command'">
                 <span class="font-semibold">Command</span>
-                <div class="overseer-info opacity-75">{{ event.event.command }}</div>
+                <div class="text-2xs opacity-75">{{ event.event.command }}</div>
             </template>
             <template v-else>
-                <span class="font-semibold">Event</span>
-                <div class="overseer-info opacity-75">{{ event.event.event }}</div>
+                <span class="font-semibold">Unknown</span>
+                <div class="text-2xs opacity-75">—</div>
             </template>
         </template>
         <template v-else>
@@ -38,14 +40,15 @@ export default {
         },
     },
 
+    methods: {
+
+        urlPath(string) {
+            const url = new URL(string);
+            return url.pathname + url.search;
+        },
+
+    },
+
 };
 
 </script>
-<style>
-    .overseer-info {
-        max-width: 40ch;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-</style>
