@@ -18,7 +18,12 @@ class CommandTracker extends Tracker
 
     public function trackCommand(CommandFinished $event)
     {
-        if (! Overseer::isTracking() || $this->shouldIgnore($event)) {
+        if (! Overseer::isTracking()) {
+            return;
+        }
+
+        if ($this->shouldIgnore($event)) {
+            Overseer::ignoreChain();
             return;
         }
 

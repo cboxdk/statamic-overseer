@@ -62,6 +62,7 @@ return [
                 '_debugbar/*',
                 'cp/overseer/*',
                 'cp/dashboard',
+                'cp/updater/count',
             ],
             'ignore_middlewares' => [
                 'web',

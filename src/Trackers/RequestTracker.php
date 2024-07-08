@@ -21,7 +21,12 @@ class RequestTracker extends Tracker
 
     public function recordRequest(RequestHandled $event)
     {
-        if (! Overseer::isTracking() || $this->shouldIgnoreRequest($event)) {
+        if (! Overseer::isTracking()) {
+            return;
+        }
+
+        if ($this->shouldIgnoreRequest($event)) {
+            Overseer::ignoreChain();
             return;
         }
 

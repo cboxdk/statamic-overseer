@@ -29,6 +29,7 @@ class JobTracker extends Tracker
         $job = $payload['data']['commandName'] ?? $payload['displayName'] ?? $payload['job'];
 
         if (in_array($job, $this->options['ignore_jobs'])) {
+            Overseer::ignoreChain();
             return;
         }
 

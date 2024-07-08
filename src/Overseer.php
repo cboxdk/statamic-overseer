@@ -16,11 +16,10 @@ class Overseer
     public static $user;
 
     public static $impersonator;
-
     public static bool $shouldTrack = false;
+    public static bool $ignoreChain = false;
 
     public static array $trackers = [];
-
     public static float $startTime;
 
     public static array $startCpuUsage;
@@ -45,6 +44,14 @@ class Overseer
     public function disableTracking(): void
     {
         self::$shouldTrack = false;
+    }
+
+    public function ignoreChain(): void
+    {
+        self::$ignoreChain = true;
+        self::$shouldTrack = false;
+        self::$events = [];
+        self::$audits = [];
     }
 
     public function serverEnabled(): bool
@@ -103,7 +110,7 @@ class Overseer
         // Stop tracking at this point
         self::$shouldTrack = false;
 
-        if (count(static::$events) > 0) {
+        if (count(static::$events) > 0 || count(static::$audits) > 0) {
 
             // performance
             $startTime = defined('LARAVEL_START') ? LARAVEL_START : request()->request->server('REQUEST_TIME_FLOAT') ?? null;
