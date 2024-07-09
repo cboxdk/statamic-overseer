@@ -3,6 +3,7 @@
 namespace Cboxdk\StatamicOverseer\Http\Controllers\CP;
 
 use Cboxdk\StatamicOverseer\Http\Resources\ExecutionCollection;
+use Cboxdk\StatamicOverseer\Http\Resources\ExecutionResourceShow;
 use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 use Illuminate\Http\Request;
 use Statamic\CP\Column;
@@ -43,7 +44,7 @@ class ExecutionsController extends CpController
         $this->authorize('viewAny', $execution);
 
         return view('statamic-overseer::executions.show', [
-            'execution' => $execution,
+            'execution' => (new ExecutionResourceShow($execution)),
         ]);
     }
 

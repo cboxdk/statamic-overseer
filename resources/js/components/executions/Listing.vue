@@ -51,7 +51,6 @@
                                     {{ execution.cpu_system_time.toFixed(3) }} /
                                     {{ execution.cpu_usage_percentage.toFixed() }}%
                                 </div>
-
                             </template>
                             <template slot="cell-cpu" slot-scope="{ row: execution }">
                             </template>

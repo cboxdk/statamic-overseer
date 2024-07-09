@@ -6,9 +6,9 @@
                 <span class="font-semibold">Request</span> /
                 {{ event.event.method }} /
                 {{ event.event.response_code }} /
-                {{ response_cache_hit ? 'Hit' : 'Miss' }}
+                {{ event.event.response_cache_hit ? 'Hit' : 'Miss' }}
                 <div class="text-2xs opacity-75 overseer-max">
-                    <a :href="event.event.url" class="text-gray-700">{{ urlPath(event.event.url) }}</a>
+                    {{ urlPath(event.event.url) }}
                 </div>
             </template>
             <template v-else-if="event.type === 'job'">
@@ -18,6 +18,10 @@
             <template v-else-if="event.type === 'command'">
                 <span class="font-semibold">Command</span>
                 <div class="text-2xs opacity-75">{{ event.event.command }}</div>
+            </template>
+            <template v-else-if="event.type === 'event'">
+                <span class="font-semibold">Event</span>
+                <div class="text-2xs opacity-75">{{ event.event.name }}</div>
             </template>
             <template v-else>
                 <span class="font-semibold">Unknown</span>

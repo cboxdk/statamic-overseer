@@ -16,10 +16,13 @@ class Overseer
     public static $user;
 
     public static $impersonator;
+
     public static bool $shouldTrack = false;
+
     public static bool $ignoreChain = false;
 
     public static array $trackers = [];
+
     public static float $startTime;
 
     public static array $startCpuUsage;
@@ -39,6 +42,11 @@ class Overseer
     public function isTracking(): bool
     {
         return self::$shouldTrack;
+    }
+
+    public function startTime(): float
+    {
+        return self::$startTime;
     }
 
     public function disableTracking(): void
