@@ -9,11 +9,6 @@ class OverseerAuditPolicy
 {
     use HandlesAuthorization;
 
-    public function __construct()
-    {
-        dump('ercre');
-    }
-
     public function before($user, $ability)
     {
         $user = \Statamic\Facades\User::fromUser($user);
