@@ -42,7 +42,7 @@
                                 <event-info :event="event" />
                             </template>
                             <template slot="cell-user" slot-scope="{ row: event }">
-                                <user :user="event.user" :impersonator="event.impersonator" />
+                                <user-value :value="event.user" :impersonator="event.impersonator" />
                             </template>
                         </data-list-table>
                     </div>
@@ -71,7 +71,7 @@
 
 <script>
 import EventInfo from './Info.vue';
-import User from '../common/User.vue';
+import UserValue from '../values/User.vue';
 
 export default {
 
@@ -79,7 +79,7 @@ export default {
 
     components: {
         EventInfo,
-        User,
+        UserValue,
     },
 
     props: ['initialColumns'],

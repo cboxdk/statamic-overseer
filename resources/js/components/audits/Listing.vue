@@ -55,7 +55,7 @@
                                     <subject :audit="audit" />
                                 </template>
                                 <template slot="cell-user" slot-scope="{ row: audit }">
-                                    <user :user="audit.user" :impersonator="audit.impersonator" />
+                                    <user-value :value="audit.user" :impersonator="audit.impersonator" />
                                 </template>
                             </data-list-table>
                         </div>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import User from '../common/User.vue';
+import UserValue from '../values/User.vue';
 import EventInfo from '../events/Info.vue';
 import Subject from './Subject.vue';
 import {
@@ -110,7 +110,7 @@ export default {
 
     components: {
         EventInfo,
-        User,
+        UserValue,
         Subject,
         LineChartGenerator,
     },

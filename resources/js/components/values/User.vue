@@ -1,9 +1,9 @@
 <template>
     <div>
-        <template v-if="user">
-            {{ user.name }}
+        <template v-if="value">
+            {{ value.name }}
         </template>
-        <template v-else="user">
+        <template v-else>
             Unknown
         </template>
         <template v-if="impersonator">
@@ -17,7 +17,7 @@
 export default {
 
     props: {
-        user: Object,
+        value: Object,
         impersonator: Object,
     },
 
