@@ -36,6 +36,6 @@ return new class extends Migration
     public function down(): void
     {
         $schema = Schema::connection(config('statamic.overseer.storage.connection'));
-        $schema->dropIfExists('overseer_events');
+        $schema->dropIfExists('overseer_audits');
     }
 };

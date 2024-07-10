@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer\Trackers;
 
+use Carbon\Carbon;
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
@@ -27,6 +28,7 @@ class RequestTracker extends Tracker
 
         if ($this->shouldIgnoreRequest($event)) {
             Overseer::ignoreChain();
+
             return;
         }
 
@@ -75,7 +77,7 @@ class RequestTracker extends Tracker
                 'middleware' => array_values(optional($request->route())->gatherMiddleware() ?? []),
                 'created_at' => now()->format('Y-m-d\TH:i:s.u'),
                 'updated_at' => now()->format('Y-m-d\TH:i:s.u'),
-            ]);
+            ], Carbon::createFromTimestamp(Overseer::startTime()));
             Overseer::trackEvent($event);
 
             // Workaround for missing events

@@ -3,6 +3,7 @@
 namespace Cboxdk\StatamicOverseer\Http\Controllers\CP;
 
 use Cboxdk\StatamicOverseer\Http\Resources\ExecutionCollection;
+use Cboxdk\StatamicOverseer\Http\Resources\ExecutionResourceShow;
 use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 use Illuminate\Http\Request;
 use Statamic\CP\Column;
@@ -43,7 +44,7 @@ class ExecutionsController extends CpController
         $this->authorize('viewAny', $execution);
 
         return view('statamic-overseer::executions.show', [
-            'execution' => $execution,
+            'execution' => (new ExecutionResourceShow($execution)),
         ]);
     }
 
@@ -55,21 +56,8 @@ class ExecutionsController extends CpController
             Column::make('initiator')
                 ->label(__('Initiator'))
                 ->sortable(false),
-            Column::make('counts')
-                ->label(__('Counts'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('duration')
-                ->label(__('Duration'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('memory')
-                ->label(__('Memory'))
-                ->numeric(true)
-                ->sortable(false),
-            Column::make('cpu')
-                ->label(__('CPU Times / Usage'))
-                ->numeric(true)
+            Column::make('stats')
+                ->label(__('Stats'))
                 ->sortable(false),
             Column::make('user')
                 ->label(__('User'))

@@ -51,17 +51,14 @@ class AuditsController extends CpController
         return [
             Column::make('created_at')
                 ->label(__('Date')),
-            Column::make('message')
-                ->label(__('Message'))
-                ->sortable(false),
             Column::make('initiator')
                 ->label(__('Initiator'))
                 ->sortable(false),
             Column::make('subject')
                 ->label(__('Subject'))
                 ->sortable(false),
-            Column::make('execution_id')
-                ->label(__('Execution'))
+            Column::make('message')
+                ->label(__('Message'))
                 ->sortable(false),
             Column::make('user')
                 ->label(__('User'))

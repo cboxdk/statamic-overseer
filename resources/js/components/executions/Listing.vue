@@ -1,5 +1,5 @@
 <template>
-    <div class="overseer-executions-listing">
+    <div class="overseer-listing">
 
         <div v-if="initializing" class="w-full flex justify-center text-center">
             <loading-graphic />
@@ -16,7 +16,7 @@
             
             <div slot-scope="{ filteredRows: rows }">
                 
-                <div class="card p-0 overflow-hidden">
+                <div class="card p-0">
 
                     <data-list-filters
                         ref="filters"
@@ -27,41 +27,39 @@
                         @changed="filterChanged"
                     />
 
-                    <data-list-table
-                        @sorted="sorted">
-                        <template slot="cell-created_at" slot-scope="{ row: execution }">
-                            <a :href="cp_url(`overseer/executions/${execution.id}`)" class="text-blue">
-                                {{ $moment(execution.created_at).format('YYYY-MM-DD HH:MM') }}
-                            </a>
-                        </template>
-                        <template slot="cell-initiator" slot-scope="{ row: execution }">
-                            <event-info :event="execution.initiator" />
-                        </template>
-                        <template slot="cell-duration" slot-scope="{ row: execution }">
-                            {{ execution.duration }} ms
-                        </template>
-                        <template slot="cell-memory" slot-scope="{ row: execution }">
-                            {{ execution.memory }} mb
-                        </template>
-                        <template slot="cell-counts" slot-scope="{ row: execution }">
-                            {{ execution.audit_count }} au / 
-                            {{ execution.event_count }} ev
-                        </template>
-                        <template slot="cell-cpu" slot-scope="{ row: execution }">
-                            {{ execution.cpu_user_time.toFixed(3) }} /
-                            {{ execution.cpu_system_time.toFixed(3) }} /
-                            {{ execution.cpu_usage_percentage.toFixed() }}%
-                        </template>
-                        <template slot="cell-user" slot-scope="{ row: execution }">
-                            <template v-if="execution.user">
-                              {{ execution.user.name }}
+                    <div class="overseer-table">
+                        <data-list-table
+                            @sorted="sorted">
+                            <template slot="cell-created_at" slot-scope="{ row: execution }">
+                                <a :href="cp_url(`overseer/executions/${execution.id}`)" class="text-blue">
+                                    {{ $moment(execution.created_at).format('YYYY-MM-DD HH:mm:ss.SSSS') }}
+                                </a>
+                                <div class="text-2xs opacity-75">
+                                    {{ execution.id }}
+                                </div>
                             </template>
-                            <template v-if="execution.impersonator">
-                                <br>
-                                ({{ execution.impersonator.name }})
+                            <template slot="cell-initiator" slot-scope="{ row: execution }">
+                                <event-info :event="execution.initiator" />
                             </template>
-                        </template>
-                    </data-list-table>
+                            <template slot="cell-stats" slot-scope="{ row: execution }">
+                                {{ execution.audit_count }} audits / 
+                                {{ execution.event_count }} events
+                                <div class="text-2xs opacity-75">
+                                    {{ execution.duration }} ms /
+                                    {{ execution.memory }} mb /
+                                    {{ execution.cpu_user_time.toFixed(3) }} /
+                                    {{ execution.cpu_system_time.toFixed(3) }} /
+                                    {{ execution.cpu_usage_percentage.toFixed() }}%
+                                </div>
+                            </template>
+                            <template slot="cell-cpu" slot-scope="{ row: execution }">
+                            </template>
+                            <template slot="cell-user" slot-scope="{ row: execution }">
+                                <user :user="execution.user" :impersonator="execution.impersonator" />
+                            </template>
+                        </data-list-table>
+                    </div>
+
                 </div>
                 
                 <data-list-pagination
@@ -87,6 +85,7 @@
 
 <script>
 import EventInfo from '../events/Info.vue';
+import User from '../common/User.vue';
 
 export default {
 
@@ -94,6 +93,7 @@ export default {
 
     components: {
         EventInfo,
+        User,
     },
 
     props: ['initialColumns'],
@@ -113,16 +113,3 @@ export default {
 
 }
 </script>
-<style>
-    .overseer-executions-listing {
-        td, th {
-            white-space: nowrap;
-            &:not(:first-child) {
-                padding-left: 0;
-            }
-        }
-        .actions-column {
-            display: none;            
-        }
-    }
-</style>

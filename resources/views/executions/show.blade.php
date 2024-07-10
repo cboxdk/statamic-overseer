@@ -7,18 +7,9 @@
         <h1 class="flex-1">{{ __('View Execution') }}</h1>
     </div>
 
-    <div class="card mb-4">
-        <h2 class="mb-4">Data</h2>
-        <pre class="text-sm">{{ json_encode($execution, JSON_PRETTY_PRINT) }}</pre>
-    </div>
-    <div class="card mb-4">
-        <h2 class="mb-4">Events</h2>
-        <pre class="text-sm">{{ json_encode($execution->events, JSON_PRETTY_PRINT) }}</pre>
-    </div>
-    <div class="card mb-4">
-        <h2 class="mb-4">Audits</h2>
-        <pre class="text-sm">{{ json_encode($execution->audits, JSON_PRETTY_PRINT) }}</pre>
-    </div>
+    <overseer-executions-view
+        :execution="{{ json_encode($execution) }}"
+    ></overseer-executions-view>
 
 @endsection
 

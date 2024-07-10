@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer;
 
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
@@ -28,9 +29,9 @@ class Event implements Arrayable, JsonSerializable
      *
      * @return void
      */
-    public function __construct(string $type, array $content)
+    public function __construct(string $type, array $content, ?Carbon $recordedAt = null)
     {
-        $this->recordedAt = now();
+        $this->recordedAt = $recordedAt ?? now();
         $this->content = $content;
         $this->type($type);
     }
