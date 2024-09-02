@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Cboxdk\\StatamicOverseer\\Tests\\ExampleTest::test_that_true_is_true":0.003}}
+{"version":"pest_3.0.0-rc.1","defects":[],"times":{"Cboxdk\\StatamicOverseer\\Tests\\ExampleTest::test_that_true_is_true":0.004}}

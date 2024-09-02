@@ -16,11 +16,14 @@
     "require-dev": {
         "orchestra/testbench": "^9.0",
         "laravel/pint": "^1.16",
-        "larastan/larastan": "^2.0"
+        "larastan/larastan": "^2.0",
+        "pestphp/pest": "3.x-dev",
+        "phpunit/phpunit": "^11.3"
     },
     "config": {
         "allow-plugins": {
-            "pixelfear/composer-dist-plugin": true
+            "pixelfear/composer-dist-plugin": true,
+            "pestphp/pest-plugin": true
         }
     },
     "extra": {

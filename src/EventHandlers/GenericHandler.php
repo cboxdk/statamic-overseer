@@ -11,8 +11,8 @@ class GenericHandler extends EventHandler
      */
     public function handle($event): void
     {
-        $type = Str::of($event::class)->snake()->remove('\\')->remove('_events')->toString();
+        $this->event['class'] = $event::class;
         $this->event['event'] = json_decode(json_encode($event), true);
-        $this->track($type);
+        $this->track();
     }
 }

@@ -26,13 +26,25 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicCollectionTreeSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntryDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicEntrySaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicGlideCacheCleared;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicImpersonationEnded;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicImpersonationStarted;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicLicenseSet;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicLicensesRefreshed;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserPasswordChanged;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserSaved;
+use Statamic\Events\GlideCacheCleared;
+use Statamic\Events\ImpersonationEnded;
+use Statamic\Events\ImpersonationStarted;
+use Statamic\Events\LicenseSet;
+use Statamic\Events\LicensesRefreshed;
+use Statamic\Events\UserPasswordChanged;
 
 class EventPresets
 {
@@ -84,9 +96,14 @@ class EventPresets
             \Statamic\Events\FormDeleted::class => GenericHandler::class,
             \Statamic\Events\FormSaved::class => GenericHandler::class,
             \Statamic\Events\FormSubmitted::class => GenericHandler::class,
+            \Statamic\Events\GlideCacheCleared::class => StatamicGlideCacheCleared::class,
             \Statamic\Events\GlobalSetCreated::class => GenericHandler::class,
             \Statamic\Events\GlobalSetDeleted::class => GenericHandler::class,
             \Statamic\Events\GlobalSetSaved::class => GenericHandler::class,
+            \Statamic\Events\ImpersonationEnded::class => StatamicImpersonationEnded::class,
+            \Statamic\Events\ImpersonationStarted::class => StatamicImpersonationStarted::class,
+            \Statamic\Events\LicenseSet::class => StatamicLicenseSet::class,
+            \Statamic\Events\LicensesRefreshed::class => StatamicLicensesRefreshed::class,
             \Statamic\Events\NavDeleted::class => GenericHandler::class,
             \Statamic\Events\NavSaved::class => GenericHandler::class,
             \Statamic\Events\NavTreeDeleted::class => GenericHandler::class,
@@ -103,6 +120,7 @@ class EventPresets
             \Statamic\Events\TermSaved::class => GenericHandler::class,
             \Statamic\Events\UserCreated::class => StatamicUserCreated::class,
             \Statamic\Events\UserDeleted::class => StatamicUserDeleted::class,
+            \Statamic\Events\UserPasswordChanged::class => StatamicUserPasswordChanged::class,
             \Statamic\Events\UserSaved::class => StatamicUserSaved::class,
             \Statamic\Events\UserGroupDeleted::class => StatamicUserGroupDeleted::class,
             \Statamic\Events\UserGroupSaved::class => StatamicUserGroupSaved::class,
