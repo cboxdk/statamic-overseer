@@ -39,7 +39,31 @@ class JobTracker extends Tracker
             'name' => $payload['displayName'],
             'tries' => $payload['maxTries'],
             'timeout' => $payload['timeout'],
-            //'data' => json_decode(json_encode($payload), true),
+        ]);
+        Overseer::trackEvent($log);
+    }
+
+    public function trackJobFailed(JobFailed $event)
+    {
+        if (! Overseer::isTracking()) {
+            return;
+        }
+
+        $payload = $event->job->payload();
+
+        $job = $payload['data']['commandName'] ?? $payload['displayName'] ?? $payload['job'];
+
+        if (in_array($job, $this->options['ignore_jobs'])) {
+            Overseer::ignoreChain();
+            return;
+        }
+
+        $log = new Event('job', [
+            'connection' => $event->job->getConnectionName(),
+            'queue' => $event->job->getQueue(),
+            'name' => $payload['displayName'],
+            'tries' => $payload['maxTries'],
+            'timeout' => $payload['timeout'],
         ]);
         Overseer::trackEvent($log);
     }
