@@ -63,6 +63,7 @@ return [
                 'cp/overseer/*',
                 'cp/dashboard',
                 'cp/updater/count',
+                'up',
             ],
             'ignore_middlewares' => [
                 'web',
