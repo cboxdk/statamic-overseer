@@ -64,6 +64,9 @@ class JobTracker extends Tracker
             'name' => $payload['displayName'],
             'tries' => $payload['maxTries'],
             'timeout' => $payload['timeout'],
+            'data' => [
+                'exception' => $event->exception->getMessage(),
+            ]
         ]);
         Overseer::trackEvent($log);
     }
