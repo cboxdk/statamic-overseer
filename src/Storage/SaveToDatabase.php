@@ -19,7 +19,7 @@ class SaveToDatabase
     public static function sync(array $events, array $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator)
     {
         rescue(function () use ($events, $audits, $executionId, $duration, $memory, $cpuUsage, $user, $impersonator) {
-            $execution = new OverseerExecution();
+            $execution = new OverseerExecution;
             $execution->id = $executionId;
             $execution->fill([
                 'user_id' => $user->id ?? null,
@@ -34,7 +34,7 @@ class SaveToDatabase
 
             /** @var Audit $event */
             foreach ($audits as $event) {
-                $audit = new OverseerAudit();
+                $audit = new OverseerAudit;
                 $audit->fill([
                     'execution_id' => $executionId,
                     'user_id' => $user->id ?? null,
@@ -46,7 +46,7 @@ class SaveToDatabase
 
             /** @var Event $eventData */
             foreach ($events as $eventData) {
-                $event = new OverseerEvent();
+                $event = new OverseerEvent;
                 $event->fill([
                     'execution_id' => $executionId,
                     'user_id' => $user->id ?? null,

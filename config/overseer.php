@@ -115,6 +115,7 @@ return [
         \Cboxdk\StatamicOverseer\Trackers\EventTracker::class => [
             'events' => [
                 ...\Cboxdk\StatamicOverseer\Presets\EventPresets::all(),
+
             ],
         ],
     ],

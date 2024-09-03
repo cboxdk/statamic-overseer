@@ -2,8 +2,6 @@
 
 namespace Cboxdk\StatamicOverseer\EventHandlers;
 
-use Statamic\Support\Str;
-
 class GenericHandler extends EventHandler
 {
     /**

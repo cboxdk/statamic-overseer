@@ -3,9 +3,9 @@
 namespace Cboxdk\StatamicOverseer\Trackers;
 
 use Carbon\Carbon;
-use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Event;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;

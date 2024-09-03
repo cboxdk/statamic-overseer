@@ -35,9 +35,8 @@ class StatamicEntrySaved extends EventHandler
 
         $this->track();
 
-        $message = 'Entry saved ('. $entry->status() .')';
-        if ($entry->isDirty('published'))
-        {
+        $message = 'Entry saved ('.$entry->status().')';
+        if ($entry->isDirty('published')) {
             if ($entry->status() === 'published') {
                 $message = 'Entry saved and published';
             } elseif ($entry->status() === 'scheduled') {

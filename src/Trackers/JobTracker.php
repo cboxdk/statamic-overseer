@@ -30,6 +30,7 @@ class JobTracker extends Tracker
 
         if (in_array($job, $this->options['ignore_jobs'])) {
             Overseer::ignoreChain();
+
             return;
         }
 
@@ -55,6 +56,7 @@ class JobTracker extends Tracker
 
         if (in_array($job, $this->options['ignore_jobs'])) {
             Overseer::ignoreChain();
+
             return;
         }
 
@@ -66,7 +68,7 @@ class JobTracker extends Tracker
             'timeout' => $payload['timeout'],
             'data' => [
                 'exception' => $event->exception->getMessage(),
-            ]
+            ],
         ]);
         Overseer::trackEvent($log);
     }

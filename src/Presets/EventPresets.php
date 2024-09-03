@@ -33,18 +33,20 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicLicenseSet;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicLicensesRefreshed;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicRevisionSaved;
+use Cboxdk\StatamicOverseer\EventHandlers\StatamicUrlInvalidated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserCreated;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupDeleted;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserGroupSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserPasswordChanged;
 use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserSaved;
-use Statamic\Events\GlideCacheCleared;
-use Statamic\Events\ImpersonationEnded;
-use Statamic\Events\ImpersonationStarted;
-use Statamic\Events\LicenseSet;
-use Statamic\Events\LicensesRefreshed;
-use Statamic\Events\UserPasswordChanged;
+use Cboxdk\StatamicOverseer\EventHandlers\Tv2regFlushCache;
+use Cboxdk\StatamicOverseer\EventHandlers\Tv2regInvalidateUrl;
+use Cboxdk\StatamicOverseer\EventHandlers\Tv2regInvalidateUrls;
+use Statamic\Events\UrlInvalidated;
+use Tv2regionerne\StatamicCache\Events\FlushCache;
+use Tv2regionerne\StatamicCache\Events\InvalidateUrl;
+use Tv2regionerne\StatamicCache\Events\InvalidateUrls;
 
 class EventPresets
 {
@@ -53,6 +55,7 @@ class EventPresets
         return [
             ...static::authentication(),
             ...static::statamic(),
+            ...static::statamicCache(),
         ];
     }
 
@@ -118,6 +121,7 @@ class EventPresets
             \Statamic\Events\TermCreated::class => GenericHandler::class,
             \Statamic\Events\TermDeleted::class => GenericHandler::class,
             \Statamic\Events\TermSaved::class => GenericHandler::class,
+            \Statamic\Events\UrlInvalidated::class => StatamicUrlInvalidated::class,
             \Statamic\Events\UserCreated::class => StatamicUserCreated::class,
             \Statamic\Events\UserDeleted::class => StatamicUserDeleted::class,
             \Statamic\Events\UserPasswordChanged::class => StatamicUserPasswordChanged::class,
@@ -125,5 +129,15 @@ class EventPresets
             \Statamic\Events\UserGroupDeleted::class => StatamicUserGroupDeleted::class,
             \Statamic\Events\UserGroupSaved::class => StatamicUserGroupSaved::class,
         ];
+    }
+
+    public static function statamicCache()
+    {
+        return [
+            FlushCache::class => Tv2regFlushCache::class,
+            InvalidateUrls::class => Tv2regInvalidateUrls::class,
+            InvalidateUrl::class => Tv2regInvalidateUrl::class,
+        ];
+
     }
 }
