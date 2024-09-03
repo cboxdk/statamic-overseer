@@ -26,21 +26,20 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(12, 1fr);
-    
     .overseer-full {
         grid-column: span 12;
-    }
-    .overseer-1\/2 {
-        grid-column: span 6;
-    }
-    .overseer-1\/4 {
-        grid-column: span 3;
     }
     .overseer-2\/3 {
         grid-column: span 8;
     }
+    .overseer-1\/2 {
+        grid-column: span 6;
+    }
     .overseer-1\/3 {
         grid-column: span 4;
+    }
+    .overseer-1\/4 {
+        grid-column: span 3;
     }
 }
 
@@ -53,14 +52,54 @@
     background-image: linear-gradient(to top, rgb(28, 46, 54), transparent);
 }
 
-.capitalize {
-    text-transform: capitalize;
+.overseer-field {
+    .overseer-label {
+        margin-bottom: 0.125rem;
+        font-weight: 500;
+    }
+    .overseer-value {
+        color: #525f63;
+        display: flex;
+        align-items: center;;
+        gap: 0.4rem;
+        > * {
+            &:not(:first-child) {
+                &::before {
+                    content: '/';
+                    padding-right: 0.4rem;
+                    opacity: 0.4;
+                }
+            }
+        }
+    }
 }
 
-.max-h-20 {
-    max-height: 5rem;
+.overseer-badge {
+    padding: 0 0.25em;
+    border-radius: 0.15rem;
 }
 
-.mb-0\.5 {
-    margin-bottom: 0.125rem;
+.overseer-dump {
+    &.overflow-hidden {
+        max-height: calc(3lh + 1.5rem);
+    }
+}
+
+.overseer-code {
+    pre {
+        white-space: normal;
+        word-break: break-all;
+    }
+}
+
+.bg-green-500 {
+    background-color: #22c55e;
+}
+
+.bg-orange-500 {
+    background-color: #f97316;
+}
+
+.bg-red-500 {
+    background-color: #ef4444;
 }

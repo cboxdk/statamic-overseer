@@ -55,7 +55,7 @@
                             <template slot="cell-cpu" slot-scope="{ row: execution }">
                             </template>
                             <template slot="cell-user" slot-scope="{ row: execution }">
-                                <user :user="execution.user" :impersonator="execution.impersonator" />
+                                <user-value :value="execution.user" :impersonator="execution.impersonator" />
                             </template>
                         </data-list-table>
                     </div>
@@ -85,7 +85,7 @@
 
 <script>
 import EventInfo from '../events/Info.vue';
-import User from '../common/User.vue';
+import UserValue from '../values/User.vue';
 
 export default {
 
@@ -93,7 +93,7 @@ export default {
 
     components: {
         EventInfo,
-        User,
+        UserValue,
     },
 
     props: ['initialColumns'],
