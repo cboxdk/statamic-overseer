@@ -16,7 +16,7 @@ class StatamicUserPasswordChanged extends EventHandler
         $this->track();
 
         Overseer::addMessage(new Audit(
-            message: 'Glide Cache cleared',
+            message: 'User password has been changed',
             properties: [
                 'user' => $event->user->toArray(),
             ],
