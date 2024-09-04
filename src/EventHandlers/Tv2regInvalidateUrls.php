@@ -16,12 +16,10 @@ class Tv2regInvalidateUrls extends EventHandler
         $this->track();
 
         Overseer::addMessage(new Audit(
-            message: 'Static cache invalidate urls',
+            message: 'Invalidate Stataic cache URLs',
             properties: [
                 'urls' => $event->urls,
             ],
-            model_type: 'user',
-            model_id: $event->authenticatedUser?->getAuthIdentifier() ?? null,
         ));
     }
 }

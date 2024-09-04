@@ -29,7 +29,7 @@ class EventAnalyticsController extends CpController
             )
             ->perMinute()
             ->count();
-        $jobs = Trend::query(OverseerEvent::query()->where('type', 'jobs'))
+        $jobs = Trend::query(OverseerEvent::query()->where('type', 'job'))
             ->dateColumn('recorded_at')
             ->between(
                 start: now()->subHours(1)->addMinute(),

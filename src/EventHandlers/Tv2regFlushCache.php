@@ -17,8 +17,6 @@ class Tv2regFlushCache extends EventHandler
 
         Overseer::addMessage(new Audit(
             message: 'Static cache flushed',
-            model_type: 'user',
-            model_id: $event->authenticatedUser?->getAuthIdentifier() ?? null,
         ));
     }
 }

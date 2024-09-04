@@ -36,6 +36,8 @@ class Overseer
 
     public function reset()
     {
+        static::$ignoreChain = false;
+        static::$shouldTrack = true;
         static::$events = [];
         static::$audits = [];
         static::$user = null;

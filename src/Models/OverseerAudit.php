@@ -8,6 +8,10 @@ use Statamic\Facades\Blueprint;
 use Statamic\Facades\Entry;
 use Statamic\Facades\Term;
 use Statamic\Facades\User;
+use Statamic\Http\Resources\API\AssetResource;
+use Statamic\Http\Resources\API\EntryResource;
+use Statamic\Http\Resources\API\TermResource;
+use Statamic\Http\Resources\API\UserResource;
 
 class OverseerAudit extends Model
 {
@@ -59,10 +63,10 @@ class OverseerAudit extends Model
     public function subject()
     {
         return match ($this->model_type) {
-            'entry' => Entry::find($this->model_id),
-            'term' => Term::find($this->model_id.':'.$this->model_handle),
-            'asset' => Asset::find($this->model_id.':'.$this->model_handle),
-            'user' => User::find($this->model_id),
+            'entry' => new EntryResource(Entry::find($this->model_id)),
+            'term' => new TermResource(Term::find($this->model_id.':'.$this->model_handle)),
+            'asset' => new AssetResource(Asset::find($this->model_id.':'.$this->model_handle)),
+            'user' => new UserResource(User::find($this->model_id)),
             'blueprint' => Blueprint::find($this->model_id),
             default => null,
         };
