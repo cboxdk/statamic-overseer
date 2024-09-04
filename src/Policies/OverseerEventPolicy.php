@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer\Policies;
 
+use Cboxdk\StatamicOverseer\Models\OverseerEvent;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OverseerEventPolicy
@@ -25,6 +26,7 @@ class OverseerEventPolicy
     public function viewAny($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -32,9 +34,10 @@ class OverseerEventPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view($user, CuratedCollection $curatedCollection)
+    public function view($user, OverseerEvent $overseerEvent)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -45,6 +48,7 @@ class OverseerEventPolicy
     public function create($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -52,9 +56,10 @@ class OverseerEventPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update($user, CuratedCollection $curatedCollection)
+    public function update($user, OverseerEvent $overseerEvent)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -62,8 +67,9 @@ class OverseerEventPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete($user, CuratedCollection $curatedCollection)
+    public function delete($user, OverseerEvent $overseerEvent)
     {
         // handled by before()
+        return false;
     }
 }

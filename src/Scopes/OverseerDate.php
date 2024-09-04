@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer\Scopes;
 
+use Statamic\Query\Builder;
 use Statamic\Query\Scopes\Filter;
 
 class OverseerDate extends Filter
@@ -15,21 +16,18 @@ class OverseerDate extends Filter
 
     /**
      * Define the filter's title.
-     *
-     * @return string
      */
-    public static function title()
+    public static function title(): string
     {
         return __('StatamicOverseerFilter');
     }
 
     /**
      * Define the filter's field items.
-     *
-     * @return array
      */
-    public function fieldItems()
+    public function fieldItems(): array
     {
+        return [];
         // return [
         //     'featured' => [
         //         'type' => 'radio',
@@ -44,7 +42,7 @@ class OverseerDate extends Filter
     /**
      * Apply the filter.
      *
-     * @param  \Statamic\Query\Builder  $query
+     * @param  Builder  $query
      * @param  array  $values
      * @return void
      */
@@ -54,25 +52,11 @@ class OverseerDate extends Filter
     }
 
     /**
-     * Define the applied filter's badge text.
-     *
-     * @param  array  $values
-     * @return string
-     */
-    public function badge($values)
-    {
-        // return $values['featured'] === 'featured'
-        //     ? __('Featured')
-        //     : __('Not Featured');
-    }
-
-    /**
      * Determine when the filter is shown.
      *
      * @param  string  $key
-     * @return bool
      */
-    public function visibleTo($key)
+    public function visibleTo($key): bool
     {
         return $key === 'overseer_audit' || $key === 'overseer_event' || $key === 'overseer_execution';
     }

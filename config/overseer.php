@@ -63,6 +63,7 @@ return [
                 'cp/overseer/*',
                 'cp/dashboard',
                 'cp/updater/count',
+                'up',
             ],
             'ignore_middlewares' => [
                 'web',
@@ -114,6 +115,7 @@ return [
         \Cboxdk\StatamicOverseer\Trackers\EventTracker::class => [
             'events' => [
                 ...\Cboxdk\StatamicOverseer\Presets\EventPresets::all(),
+
             ],
         ],
     ],

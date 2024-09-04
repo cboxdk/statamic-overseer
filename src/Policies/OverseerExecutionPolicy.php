@@ -2,6 +2,7 @@
 
 namespace Cboxdk\StatamicOverseer\Policies;
 
+use Cboxdk\StatamicOverseer\Models\OverseerExecution;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OverseerExecutionPolicy
@@ -25,6 +26,7 @@ class OverseerExecutionPolicy
     public function viewAny($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -32,9 +34,10 @@ class OverseerExecutionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view($user, CuratedCollection $curatedCollection)
+    public function view($user, OverseerExecution $overseerExecution)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -45,6 +48,7 @@ class OverseerExecutionPolicy
     public function create($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -52,9 +56,10 @@ class OverseerExecutionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update($user, CuratedCollection $curatedCollection)
+    public function update($user, OverseerExecution $overseerExecution)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -62,8 +67,9 @@ class OverseerExecutionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete($user, CuratedCollection $curatedCollection)
+    public function delete($user, OverseerExecution $overseerExecution)
     {
         // handled by before()
+        return false;
     }
 }

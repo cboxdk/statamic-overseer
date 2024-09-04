@@ -8,6 +8,7 @@ use Illuminate\Http\Client\Events\ConnectionFailed;
 use Illuminate\Http\Client\Events\ResponseReceived;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
+use Illuminate\Http\File;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
 

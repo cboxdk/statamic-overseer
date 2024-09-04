@@ -22,7 +22,7 @@ abstract class EventHandler
         $this->handle($event);
     }
 
-    abstract public function handle($event): void;
+    abstract public function handle(object $event): void;
 
     public function track($type = 'event'): void
     {

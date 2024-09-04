@@ -17,11 +17,15 @@
     "require-dev": {
         "orchestra/testbench": "^9.0",
         "laravel/pint": "^1.16",
-        "larastan/larastan": "^2.0"
+        "larastan/larastan": "^2.0",
+        "pestphp/pest": "3.x-dev",
+        "phpunit/phpunit": "^11.3",
+        "tv2regionerne/statamic-cache": "dev-main"
     },
     "config": {
         "allow-plugins": {
-            "pixelfear/composer-dist-plugin": true
+            "pixelfear/composer-dist-plugin": true,
+            "pestphp/pest-plugin": true
         }
     },
     "extra": {
@@ -34,6 +38,17 @@
                 "Cboxdk\\StatamicOverseer\\ServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "pint": [
+            "php -d memory_limit=-1 ./vendor/bin/pint"
+        ],
+        "phpstan": [
+            "php -d memory_limit=-1 ./vendor/bin/phpstan"
+        ],
+        "test": [
+            "php -d memory_limit=-1 ./vendor/bin/pest"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

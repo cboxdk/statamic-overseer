@@ -77,7 +77,7 @@ class ServiceProvider extends AddonServiceProvider
     {
         $this->bootPermissions();
         $this->app->bind('Overseer', function () {
-            return new Overseer();
+            return new Overseer;
         });
 
         Nav::extend(function ($nav) {

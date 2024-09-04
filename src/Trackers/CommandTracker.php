@@ -24,6 +24,7 @@ class CommandTracker extends Tracker
 
         if ($this->shouldIgnore($event)) {
             Overseer::ignoreChain();
+
             return;
         }
 

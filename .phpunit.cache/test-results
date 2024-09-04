@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Cboxdk\\StatamicOverseer\\Tests\\ExampleTest::test_that_true_is_true":0.003}}
+{"version":"pest_3.0.0-rc.1","defects":{"P\\Tests\\Events\\Authentication::__pest_evaluable_login_event":8},"times":{"Cboxdk\\StatamicOverseer\\Tests\\ExampleTest::test_that_true_is_true":0.005,"P\\Tests\\Events\\Authentication::__pest_evaluable_login_event":0.015,"P\\Tests\\Overseer\\Overseer::__pest_evaluable_overseer_is_enabled":0.008}}

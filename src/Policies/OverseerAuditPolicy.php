@@ -26,6 +26,7 @@ class OverseerAuditPolicy
     public function viewAny($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -36,6 +37,7 @@ class OverseerAuditPolicy
     public function view($user, OverseerAudit $overseerAudit)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -46,6 +48,7 @@ class OverseerAuditPolicy
     public function create($user)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -56,6 +59,7 @@ class OverseerAuditPolicy
     public function update($user, OverseerAudit $overseerAudit)
     {
         // handled by before()
+        return false;
     }
 
     /**
@@ -66,5 +70,6 @@ class OverseerAuditPolicy
     public function delete($user, OverseerAudit $overseerAudit)
     {
         // handled by before()
+        return false;
     }
 }
