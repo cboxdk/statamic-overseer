@@ -13,9 +13,9 @@ class Overseer
 
     public static array $audits = [];
 
-    public static $user;
+    public static $user = null;
 
-    public static $impersonator;
+    public static $impersonator = null;
 
     public static bool $shouldTrack = false;
 
@@ -29,6 +29,17 @@ class Overseer
 
     public function start($app)
     {
+        static::$shouldTrack = true;
+        static::$startTime = microtime(true);
+        static::$startCpuUsage = getrusage();
+    }
+
+    public function reset()
+    {
+        static::$events = [];
+        static::$audits = [];
+        static::$user = null;
+        static::$impersonator = null;
         static::$shouldTrack = true;
         static::$startTime = microtime(true);
         static::$startCpuUsage = getrusage();
@@ -113,7 +124,7 @@ class Overseer
         return self::$trackers;
     }
 
-    public function store(): void
+    public function store($duration = null): void
     {
         // Stop tracking at this point
         self::$shouldTrack = false;
@@ -122,7 +133,7 @@ class Overseer
 
             // performance
             $startTime = defined('LARAVEL_START') ? LARAVEL_START : request()->request->server('REQUEST_TIME_FLOAT') ?? null;
-            $duration = $startTime ? floor((microtime(true) - $startTime) * 1000) : null;
+            $duration ??= $startTime ? floor((microtime(true) - $startTime) * 1000) : null;
             $memory = round(memory_get_peak_usage(true) / 1024 / 1024, 1);
 
             // Calculate cpu usage
