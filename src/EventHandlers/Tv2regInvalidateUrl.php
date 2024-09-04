@@ -4,7 +4,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
-use Tv2regionerne\StatamicCache\Events\InvalidateUrls;
 
 class Tv2regInvalidateUrl extends EventHandler
 {

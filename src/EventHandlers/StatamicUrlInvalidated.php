@@ -5,7 +5,6 @@ namespace Cboxdk\StatamicOverseer\EventHandlers;
 use Cboxdk\StatamicOverseer\Audit;
 use Cboxdk\StatamicOverseer\Facades\Overseer;
 use Statamic\Events\UrlInvalidated;
-use Statamic\Events\UserCreated;
 
 class StatamicUrlInvalidated extends EventHandler
 {

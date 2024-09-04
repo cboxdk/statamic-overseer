@@ -10,8 +10,7 @@ use Statamic\Facades\User;
 class FailedLoginHandler extends EventHandler
 {
     /**
-     * @param Failed $event
-     * @return void
+     * @param  Failed  $event
      */
     public function handle($event): void
     {

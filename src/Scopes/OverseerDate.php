@@ -16,8 +16,6 @@ class OverseerDate extends Filter
 
     /**
      * Define the filter's title.
-     *
-     * @return string
      */
     public static function title(): string
     {
@@ -26,8 +24,6 @@ class OverseerDate extends Filter
 
     /**
      * Define the filter's field items.
-     *
-     * @return array
      */
     public function fieldItems(): array
     {
@@ -59,7 +55,6 @@ class OverseerDate extends Filter
      * Determine when the filter is shown.
      *
      * @param  string  $key
-     * @return bool
      */
     public function visibleTo($key): bool
     {

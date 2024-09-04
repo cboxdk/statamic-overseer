@@ -43,7 +43,6 @@ use Cboxdk\StatamicOverseer\EventHandlers\StatamicUserSaved;
 use Cboxdk\StatamicOverseer\EventHandlers\Tv2regFlushCache;
 use Cboxdk\StatamicOverseer\EventHandlers\Tv2regInvalidateUrl;
 use Cboxdk\StatamicOverseer\EventHandlers\Tv2regInvalidateUrls;
-use Statamic\Events\UrlInvalidated;
 use Tv2regionerne\StatamicCache\Events\FlushCache;
 use Tv2regionerne\StatamicCache\Events\InvalidateUrl;
 use Tv2regionerne\StatamicCache\Events\InvalidateUrls;
