@@ -66,7 +66,7 @@ class JobTracker extends Tracker
             'timeout' => $payload['timeout'],
         ]);
 
-        $startTime = Blink::get('overseer-job-starttime-'.$event->job->uuid(), $payload['pushedAt']);
+        $startTime = Blink::get('overseer-job-starttime-'.$event->job->uuid(), $payload['pushedAt'] ?? now());
         $duration = $startTime ? floor((microtime(true) - $startTime) * 1000) : null;
 
         Overseer::trackEvent($log);
